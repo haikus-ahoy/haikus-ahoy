@@ -21,13 +21,13 @@ class App extends Component {
       seedWord: '',
       currentMatches: dummyData
     }
-    console.log(this.state.currentMatches);
+    
   }
 
   // function to get the user input, which makes the API call to the Datamuse API
   getUserWord = () => {
     const seedWord = this.state.seedWord;
-    console.log(this.state.seedWord)
+   
 
     // API call to Datamuse to get the syllable count for the user input, and to error handle potential spelling mistakes
     axios({
@@ -72,9 +72,11 @@ class App extends Component {
       })
   }
 
+  //Get a second API call for words that might follow seedWord in a sentence
   getWordSuggestions = () => {
+    //create a variable for seedWord
     const previousWord = this.state.seedWord;
-    console.log('hello', previousWord);
+    //call Axios
     axios({
       url: `http://api.datamuse.com/words?lc=${previousWord}&md=s`,
       method: 'GET',
@@ -82,8 +84,37 @@ class App extends Component {
     })
       // a promise to return a successful or unsuccessful API call
       .then((response) => {
-        console.log(response);
       })
+  }
+  //a third API call to get some words related to boats
+  getShipWords = () => {
+    axios({
+      url: `http://api.datamuse.com/words?topics=boat&md=s`,
+      method: 'GET',
+      dataResponse: 'json',
+    // a promise to return a successful or unsuccessful API call
+    }).then((responseTwo) => {
+      //a function to return words with syllables less than *4*
+      const filterdSyllables = responseTwo.data.filter(result => {
+      return result.numSyllables < 4
+      } )
+      //a variable for the top three random words
+      const topThree = [];
+      //a for loop to filter through the array
+      for (let i = 0; i < 3; i++) {
+        //if the array returns less than three words, break 
+        if (filterdSyllables.length < 1) {
+          break
+        } else {
+          //otherwise create a variable for length
+          const length = filterdSyllables.length;
+          //create a variable for randomIndex
+          const randIndex = Math.floor(Math.random() * length);
+          //push the three random boat words to topThree
+          topThree.push(filterdSyllables.splice(randIndex, 1)[0]);
+        }
+      }
+    })
   }
 
 
@@ -94,6 +125,7 @@ class App extends Component {
     // calls the getUserInput function, which calls the API
     this.getUserWord();
     this.getWordSuggestions();
+    this.getShipWords();
   }
 
   // keeps track of the user's keystrokes in the input field
@@ -102,7 +134,7 @@ class App extends Component {
     this.setState({
       seedWord: event.target.value
     })
-    console.log(this.state)
+    
   }
 
   render() {
