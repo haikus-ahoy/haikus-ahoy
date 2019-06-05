@@ -12,7 +12,7 @@ class App extends Component {
         numSyllables: 3
       })
     }
-
+    
     super();
 
     this.state = {
@@ -24,6 +24,10 @@ class App extends Component {
     
   }
 
+  // componentDidMount(){
+  //   this.getShipWords();
+  // }
+  
   // function to get the user input, which makes the API call to the Datamuse API
   getUserWord = () => {
     const seedWord = this.state.seedWord;
