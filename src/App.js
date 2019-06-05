@@ -1,32 +1,26 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 import './App.css';
 
 class App extends Component {
-  constructor() {
-
-    const dummyData = [];
-    for (let i = 0; i < 10; i++) {
-      dummyData.push({
-        word: "umbrella",
-        numSyllables: 3
-      })
-    }
-    
+  constructor() {  
     super();
 
     this.state = {
       lineOne: [],
       getUserWord: [],
       seedWord: '',
-      currentMatches: dummyData
+      allBoatWords:[],
+      wordOptions: [],
+      currentMatches: [],
     }
     
   }
 
-  // componentDidMount(){
-  //   this.getShipWords();
-  // }
+  componentDidMount(){
+    this.getShipWords();
+  }
   
   // function to get the user input, which makes the API call to the Datamuse API
   getUserWord = () => {
@@ -41,18 +35,18 @@ class App extends Component {
     })
       // a promise to return a successful or unsuccessful API call
       .then(response => {
-        console.log("resp", response);
+        // console.log("resp", response);
         // a variable to store the data from the API
         response = response.data;
         // a variable to store the word value from the first entry in the array
         const word = response[0].word;
         // a variable to store the number of syllables value from the first entry in the array
         const numSyllables = response[0].numSyllables;
-        console.log(word, numSyllables);
-        console.log(`"${word}" has ${numSyllables} syllables.`);
+        // console.log(word, numSyllables);
+        // console.log(`"${word}" has ${numSyllables} syllables.`);
         // if the user input word is less than 6 syllables
         if (seedWord === word && numSyllables < 6) {
-          console.log(`The first line has ${5 - numSyllables} syllables remaining.`);
+          // console.log(`The first line has ${5 - numSyllables} syllables remaining.`);
           // a variable that holds a copy of the line one array in state
           const newFirstLine = [...this.state.lineOne];
           // pushes the word and number of syllables values of the the user input word to the newFirstLine array
@@ -62,17 +56,22 @@ class App extends Component {
           this.setState({
             lineOne: newFirstLine,
           });
-          console.log(this.state.lineOne);
+          // console.log(this.state.lineOne);
           // if the user's word has too many syllables, prompt an error
         } else if (seedWord === word && numSyllables < 5) {
-          console.log(`Think of a word between 1 and 5 syllables and try again.`);
+          
+          // console.log(`Think of a word between 1 and 5 syllables and try again.`);
+          return;
           // error handling for if the user misspells their word
         } else {
-          console.log(`It looks like you meant to type "${word}". Please try again.`);
+          // console.log(`It looks like you meant to type "${word}". Please try again.`);
+          return;
         }
+        this.getWordSuggestions();
         // more error handling - if word cannot be found, or is spelled too incorrectly to be recognized
       }).catch((response) => {
-        console.log(`"${seedWord}" is not a word that I know.`);
+        // console.log(`"${seedWord}" is not a word that I know.`);
+
       })
   }
 
@@ -88,20 +87,46 @@ class App extends Component {
     })
       // a promise to return a successful or unsuccessful API call
       .then((response) => {
+       
+        const wordOptionsArray = [];
+        for(let i = 0; i < 7; i++){
+          wordOptionsArray.push(response.data[i])
+        }
+         const threeBoatWords = this.grabThree();
+        const fullWordOptionsArray = wordOptionsArray.concat(threeBoatWords);
+          console.log(fullWordOptionsArray, "105");
+          this.setState({
+         wordOptions: fullWordOptionsArray,
+        })
+        
       })
   }
   //a third API call to get some words related to boats
   getShipWords = () => {
     axios({
-      url: `http://api.datamuse.com/words?topics=boat&md=s`,
+      url: `http://api.datamuse.com/words?topics=boat&md=s&max=1000`,
       method: 'GET',
       dataResponse: 'json',
     // a promise to return a successful or unsuccessful API call
     }).then((responseTwo) => {
-      //a function to return words with syllables less than *4*
       const filterdSyllables = responseTwo.data.filter(result => {
-      return result.numSyllables < 4
+        return result.numSyllables < 4
+      })
+      this.setState({
+        allBoatWords: filterdSyllables,
+      })
+    })
+      //================= 
+     
+  }
+  //this will be modified when haiku is in working progress. 
+  grabThree = ()=>{
+     //a function to return words with syllables less than *4*
+     const allBoatWords = [...this.state.allBoatWords];
+      const filterdSyllables = allBoatWords.filter(result => {
+        return result.numSyllables < 4
       } )
+      
       //a variable for the top three random words
       const topThree = [];
       //a for loop to filter through the array
@@ -118,9 +143,9 @@ class App extends Component {
           topThree.push(filterdSyllables.splice(randIndex, 1)[0]);
         }
       }
-    })
-  }
-
+         return topThree;
+    }
+  
 
   // click event for our button
   handleClick = (e) => {
@@ -128,8 +153,8 @@ class App extends Component {
     e.preventDefault();
     // calls the getUserInput function, which calls the API
     this.getUserWord();
-    this.getWordSuggestions();
-    this.getShipWords();
+   
+    // this.getShipWords();
   }
 
   // keeps track of the user's keystrokes in the input field
@@ -153,15 +178,25 @@ class App extends Component {
 
 
         <div className="nextWordOption">
+        <h2>Word Options</h2>
           <ul>
-            {this.state.currentMatches.map((result, i) => {
+            {this.state.wordOptions.map((result, i) => {
               return (
-                <li key={i}>{result.word}</li>
+                <li key={i}><button>{result.word}</button></li>
               )
             })}
           </ul>
-        </div>
 
+        </div>
+        <div>
+            <h2>Haiku</h2>
+            <ul>
+              {this.state.lineOne.map((result, i) => {
+                return (<li key={i}>{result.word}</li>)
+                }
+              )}
+            </ul>
+        </div>
 
 
       </div>
