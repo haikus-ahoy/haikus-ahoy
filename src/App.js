@@ -99,17 +99,19 @@ class App extends Component {
       for(let i = 0; i < 7; i++){
         wordOptionsArray.push(response.data[i])
       }
+      // filter undefined hits
+      const filteredWordOptions = wordOptionsArray.filter(element => {
+        return element !== undefined;
+      });
       const threeBoatWords = this.grabThree();
       ////////////////////////////////////////////////////////////
       //we need to concat the chosenboat words that we will creat
       console.log(this.state.currentThreeBoatWords, 'these boat words now')
-      const fullWordOptionsArray = wordOptionsArray.concat(this.state.currentThreeBoatWords);
+      const fullWordOptionsArray = filteredWordOptions.concat(this.state.currentThreeBoatWords);
       console.log('FULL OPTIONS ARRAY: ', fullWordOptionsArray);
-      if (!fullWordOptionsArray.includes(undefined)){
-        this.setState({
-          wordOptions: fullWordOptionsArray,
-        })
-      }
+      this.setState({
+        wordOptions: fullWordOptionsArray,
+      })
     })
     .catch(() => {
       alert('catching getWordSuggestions')
