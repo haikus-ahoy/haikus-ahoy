@@ -18,6 +18,10 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.Flex-Parent {
+  display: flex;
+  justify-content: space-between;
+}
 
 .App-link {
   color: #61dafb;
