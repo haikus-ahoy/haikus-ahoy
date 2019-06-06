@@ -104,9 +104,12 @@ class App extends Component {
       //we need to concat the chosenboat words that we will creat
       console.log(this.state.currentThreeBoatWords, 'these boat words now')
       const fullWordOptionsArray = wordOptionsArray.concat(this.state.currentThreeBoatWords);
+      console.log('FULL OPTIONS ARRAY: ', fullWordOptionsArray);
+      if (!fullWordOptionsArray.includes(undefined)){
         this.setState({
-        wordOptions: fullWordOptionsArray,
-      })
+          wordOptions: fullWordOptionsArray,
+        })
+      }
     })
     .catch(() => {
       alert('catching getWordSuggestions')
