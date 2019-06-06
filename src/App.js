@@ -79,6 +79,7 @@ class App extends Component {
         // more error handling - if word cannot be found, or is spelled too incorrectly to be recognized
     }).catch((response) => {
       // console.log(`"${seedWord}" is not a word that I know.`);
+      alert('catch from check user word');
     })
   }
 
@@ -107,8 +108,7 @@ class App extends Component {
         wordOptions: fullWordOptionsArray,
       })
     })
-    .catch(response => {
-      console.log(response);
+    .catch(() => {
       alert('catching getWordSuggestions')
     })
   }
