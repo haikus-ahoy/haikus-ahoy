@@ -107,6 +107,10 @@ class App extends Component {
         wordOptions: fullWordOptionsArray,
       })
     })
+    .catch(response => {
+      console.log(response);
+      alert('catching getWordSuggestions')
+    })
   }
   //a third API call to get some words related to boats
   getShipWords = () => {
