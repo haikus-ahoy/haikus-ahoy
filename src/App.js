@@ -208,12 +208,6 @@ class App extends Component {
     const wholeHaiku = [...this.state.wholeHaiku]
     //creating a variable for the new word
     const newWord = this.state.wordOptions[index]
-
-    // const buttonReveal = () => {
-    //   document.getElementById('removeButton').show();
-    // }
-
-    // buttonReveal();
    
     //push the new word to the wholeHaiku array
     wholeHaiku.push(newWord)
@@ -291,10 +285,14 @@ class App extends Component {
 removeLastWord = () => {
   const wholeHaikuCopy = [...this.state.wholeHaiku];
   wholeHaikuCopy.pop();
+  const newLastWord = wholeHaikuCopy[wholeHaikuCopy.length - 1].word;
   this.setState({
     wholeHaiku: wholeHaikuCopy,
   },
-    this.distributeSyllables)
+    () => {
+      this.distributeSyllables();
+      this.getWordSuggestions(newLastWord);
+    })
 }  
 
   render() {
