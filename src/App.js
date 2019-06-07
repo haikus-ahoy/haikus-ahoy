@@ -307,7 +307,7 @@ removeLastWord = () => {
               <div className="wrapperSmall">
                 <form action="submit">
                   <label htmlFor="word">Input Starting Word Here</label>
-                  <input onChange={this.handleChange} value={this.state.seedWord} id="word" name="word" type="text" />
+                  <input onChange={this.handleChange} value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/>
                   <button disabled={this.state.wholeHaiku.length > 0 ? true : false } onClick={this.handleClick}>Submit</button>
                 </form>
                 {/* wrapperSmall */}
