@@ -401,8 +401,59 @@ removeLastWord = () => {
                   )}
                 </ul>
               </div>
+              {/* nextWordOption */}
             </div>
-          </div>
+          {/*container */}
+          </section>
+          <section className="container">
+            <div className="haikus">
+              <div className="wrapperSmall">
+                <h2>Haiku</h2>
+                <div className="Flex-Parent">
+                
+                  <div className="lines">
+                    <h3>Line One</h3>
+                    <ul>
+                      {this.state.lineOne.map((result, i) => {
+                        return (<li key={i}>{result.word}</li>)
+                        }
+                      )}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3>Line Two</h3>
+                    <ul>
+                      {this.state.lineTwo.map((result, i) => {
+                        return (<li key={i}>{result.word}</li>)
+                      }
+                      )}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3>Line Three</h3>
+                    <ul>
+                      {this.state.lineThree.map((result, i) => {
+                        return (<li key={i}>{result.word}</li>)
+                      }
+                      )}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3>Whole Haiku</h3>
+                    <ul>
+                      {this.state.wholeHaiku.map((result, i) => {
+                        return (<li key={i}>{result.word}</li>)
+                      }
+                      )}
+                    </ul>
+                  </div>
+                </div>
+              {/* wrapperSmall */}
+            </div>
+            {/* haikus */}
+            </div>
+          </section>
+          {/* WrapperBig */}
         </div>
       </Router>
     );
