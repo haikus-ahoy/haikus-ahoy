@@ -6,7 +6,7 @@ import './App.css';
 class App extends Component {
   constructor() {  
     super();
-
+    //set state for each of the lines, the whole Haiku, the user's word, the seed word for getting more results, all the boat words form the initial axios call *************
     this.state = {
       lineOne:[],
       lineTwo:[],
@@ -25,7 +25,7 @@ class App extends Component {
     }
     
   }
-
+  //axios call for all the ship words that we pull three at a time from 
   componentDidMount(){
     this.getShipWords();
   }
@@ -45,7 +45,7 @@ class App extends Component {
     .then(response => {
       // a variable to store the data from the API
       response = response.data;
-      // a variable to store the word value from the first entry in the array
+      // a variable to error handle if word is spelled wrong, and get the first word in the array of suggested correct spellings
       const word = response[0].word;
       
       // a variable to store the number of syllables value from the first entry in the array
@@ -56,21 +56,18 @@ class App extends Component {
         // console.log(`The first line has ${5 - numSyllables} syllables remaining.`);
         // a variable that holds a copy of the line one array in state
         const newFirstLine = [...this.state.wholeHaiku];
-        // pushes the word and number of syllables values of the the user input word to the newFirstLine array
+        // pushes the word and number of syllables values of the user input word to the newFirstLine array
         newFirstLine.push({ 'word': word, 'numSyllables': numSyllables})
         this.getWordSuggestions(); 
         //counting the first word
         const firstWordSyllableCount = this.countSyllables(newFirstLine);
        
-        // sets state of wholeHaiku to be equal to the value of newFirstLine
+        // sets state of wholeHaiku to be equal to the value of newFirstLine, reset user input to nothing 
         this.setState({
           wholeHaiku: newFirstLine,
           seedWord: ''
         });
-        // console.log(this.state.wholeHaiku);
         // if the user's word has too many syllables, prompt an error
-
-        //set state for 
       } else if (seedWord === word && numSyllables > 5) {
         
         // console.log(`Think of a word between 1 and 5 syllables and try again.`);
@@ -99,11 +96,15 @@ class App extends Component {
     })
     // a promise to return a successful or unsuccessful API call
     .then((response) => {
+      //copying syllable filter, which is set to 4 in state
       const syllableFilter = this.state.syllableFilter;
+      //filtering out punctuation and making sure the words being generated are less than the sylable filter based on the conditionals in the syllableFilter below
       const filterPunctuation = response.data.filter((hit) => {
         return hit.word !== "." && hit.numSyllables <= syllableFilter;
       })
+      //Create an empty word array
       const wordOptionsArray = [];
+      //push the filteredPunctuation words into the wordOptionsArray
       for(let i = 0; i < 7; i++){
         wordOptionsArray.push(filterPunctuation[i])
       }
@@ -111,16 +112,15 @@ class App extends Component {
       const filteredWordOptions = wordOptionsArray.filter(element => {
         return element !== undefined;
       });
+      //grabbing threeBoatWords from below, and concatonating them to the filteredWordOptions to display for the user to pick from 
       const threeBoatWords = this.grabThree();
-      ////////////////////////////////////////////////////////////
-      //we need to concat the chosenboat words that we will creat
-    
       const fullWordOptionsArray = filteredWordOptions.concat(this.state.currentThreeBoatWords);
-
+      //setting state of wordOptions to fullWordOptionsArray
       this.setState({
         wordOptions: fullWordOptionsArray,
       })
     })
+    //error checking 
     .catch(() => {
       alert('catching getWordSuggestions')
     })
@@ -133,24 +133,27 @@ class App extends Component {
       dataResponse: 'json',
     // a promise to return a successful or unsuccessful API call
     }).then((responseTwo) => {
+      //filtering the results based on the conditional filter of syllables below
       const filterdSyllables = responseTwo.data.filter(result => {
         return result.numSyllables < 4
       })
+      //setState of allBoatWords to the filteredSyllables boat words
       this.setState({
         allBoatWords: filterdSyllables,
       }, () => {
+        //callgrabThree function to insure it is called only when API call is successsful
         this.grabThree();
       }
-      //////////////////////////////////////////////////////////////
-      //get three boat words here not alone without knowing the axios is done
       )
     })
   }
-  //this will be modified when haiku is in working progress. 
+  //grab three boat words form teh one API call on componentDidMount
   grabThree = ()=>{
-    //a function to return words with syllables less than *4*
+    //a copy of allBoatWrods
     const allBoatWords = [...this.state.allBoatWords];
+    //a copy of syllableFitler
     const syllableFilter = this.state.syllableFilter;
+    //filtering the boat words based on how many syllables are reuqired based on how many syllables are left per line for the user
     const filterdSyllables = allBoatWords.filter(result => {
       return result.numSyllables <= syllableFilter;
       } )
@@ -158,7 +161,7 @@ class App extends Component {
     const topThree = [];
     //a for loop to filter through the array
     for (let i = 0; i < 3; i++) {
-      //if the array returns less than three words, break 
+      //if the array returns less than one words, break 
       if (filterdSyllables.length < 1) {
         break
       } else {
@@ -171,6 +174,7 @@ class App extends Component {
         }
     }
     this.setState({
+      //set the state for currentThreeBoatWords to topThree
       currentThreeBoatWords: topThree
     })
     return topThree;
@@ -227,18 +231,24 @@ class App extends Component {
     return syllableReduce
   }
   
+  //a function to check the syllable count of each line and push the lines to the state
   distributeSyllables = () => {
+    //a copy of whole Haiku
     const wholeHaiku = [...this.state.wholeHaiku];
+    //save an array for each line
     const lineOne =[];
     const lineTwo =[];
     const lineThree= [];
+    //create a variable to start the syllable count at four
     let syllableFilter = 4;
-
+    //going through the wholeHaiku, which is the created Haiku thus far at any given moment
     wholeHaiku.forEach((count, i) => {
+      //grab a slice of wholeHaiku so we can count the number of syllables
       const haikuSlice = wholeHaiku.slice(0, i+1);
       const sliceSyllables = this.countSyllables(haikuSlice);
       
-
+      //depending on our current number of syllables, push the word to the matching line 
+      //also calculate the number of syllables remaining for that line
       if (sliceSyllables < 6){
         lineOne.push(wholeHaiku[i]);
         syllableFilter = 5 - this.countSyllables(lineOne);
@@ -252,11 +262,13 @@ class App extends Component {
         syllableFilter = 5 - this.countSyllables(lineThree);
         console.log("filter3", syllableFilter)
       } 
+      //when the syllable filter is less than 1, rest to 0 so the user wil be given options for the next line
       if (syllableFilter < 1){
         syllableFilter = 4;
       }
       
     })
+    //set the state for lineOne to lineThree and syllableFilter
    this.setState({
      lineOne: lineOne,
      lineTwo: lineTwo,
