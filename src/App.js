@@ -58,16 +58,16 @@ class App extends Component {
       if (seedWord === word && numSyllables < 6) {
         // console.log(`The first line has ${5 - numSyllables} syllables remaining.`);
         // a variable that holds a copy of the line one array in state
-        const newFirstLine = [...this.state.wholeHaiku];
-        // pushes the word and number of syllables values of the user input word to the newFirstLine array
-        newFirstLine.push({ 'word': word, 'numSyllables': numSyllables})
-        this.getWordSuggestions(); 
+        const newWholeHaiku = [...this.state.wholeHaiku];
+        // pushes the word and number of syllables values of the user input word to the newWholeHaiku array
+        newWholeHaiku.push({ 'word': word, 'numSyllables': numSyllables})
+        this.getWordSuggestions(word); 
         //counting the first word
-        const firstWordSyllableCount = this.countSyllables(newFirstLine);
+        const firstWordSyllableCount = this.countSyllables(newWholeHaiku);
        
-        // sets state of wholeHaiku to be equal to the value of newFirstLine, reset user input to nothing 
+        // sets state of wholeHaiku to be equal to the value of newWholeHaiku, reset user input to nothing 
         this.setState({
-          wholeHaiku: newFirstLine,
+          wholeHaiku: newWholeHaiku,
           seedWord: ''
         },
           this.distributeSyllables);
@@ -89,9 +89,9 @@ class App extends Component {
   }
 
   //Get a second API call for words that might follow seedWord in a sentence
-  getWordSuggestions = () => {
+  getWordSuggestions = (previousWord) => {
     //create a variable for seedWord
-    const previousWord = this.state.seedWord;
+    // const previousWord = this.state.seedWord;
     //call Axios
     axios({
       url: `http://api.datamuse.com/words?lc=${previousWord}&md=s`,
@@ -221,13 +221,13 @@ class App extends Component {
     //set state so that wholeHaiku is the new wholeHaiku and seedWord is the newWord's property of word
     this.setState ({
       wholeHaiku: wholeHaiku,
-      seedWord: newWord.word,
-      // seedWord: '',
+      // seedWord: newWord.word,
+      seedWord: '',
       }, 
       //doing a callback to the getWordSuggestions so we can repopulate the options
       () => {
         //call get word suggestions to repopulate the next word options 
-        this.getWordSuggestions()
+        this.getWordSuggestions(newWord.word)
         const currentSyllables = this.countSyllables(wholeHaiku)
         this.distributeSyllables();
       }
