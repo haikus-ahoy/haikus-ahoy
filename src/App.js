@@ -66,7 +66,8 @@ class App extends Component {
         this.setState({
           wholeHaiku: newFirstLine,
           seedWord: ''
-        });
+        },
+          this.distributeSyllables);
         // if the user's word has too many syllables, prompt an error
       } else if (seedWord === word && numSyllables > 5) {
         
@@ -204,9 +205,16 @@ class App extends Component {
     const wholeHaiku = [...this.state.wholeHaiku]
     //creating a variable for the new word
     const newWord = this.state.wordOptions[index]
+
+    // const buttonReveal = () => {
+    //   document.getElementById('removeButton').show();
+    // }
+
+    // buttonReveal();
    
     //push the new word to the wholeHaiku array
     wholeHaiku.push(newWord)
+    
     //set state so that wholeHaiku is the new wholeHaiku and seedWord is the newWord's property of word
     this.setState ({
       wholeHaiku: wholeHaiku,
@@ -276,7 +284,15 @@ class App extends Component {
      syllableFilter: syllableFilter,
    })
 }
-  
+
+removeLastWord = () => {
+  const wholeHaikuCopy = [...this.state.wholeHaiku];
+  wholeHaikuCopy.pop();
+  this.setState({
+    wholeHaiku: wholeHaikuCopy,
+  },
+    this.distributeSyllables)
+}  
 
   render() {
     return (
@@ -295,7 +311,7 @@ class App extends Component {
               return (
                 // Creating an onClick listener for each button appended to the page 
                 <li key={i}><button  onClick={(event) => { this.buttonWordChoice(event, i)} } className="wordButton">
-                {result.word}
+                  {result.word}
                 </button></li>
               )
             })}
@@ -303,6 +319,7 @@ class App extends Component {
 
         </div>
         <h2>Haiku</h2>
+        {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" onClick={this.removeLastWord}>Remove last item</button> : null}
         <div className="Flex-Parent">
          
           <div className="lines">
@@ -347,3 +364,5 @@ class App extends Component {
   }
 }
 export default App;
+
+{/* <i className="fas fa-check"></i> <i className="fas fa-times"></i> */}
