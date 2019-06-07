@@ -21,6 +21,7 @@ class App extends Component {
       currentThreeBoatWords: [],
       lineTwoSyllables: 0,
       lineThreeSyllables: 0,
+      syllableFilter: 4,
     }
     
   }
@@ -98,9 +99,9 @@ class App extends Component {
     })
     // a promise to return a successful or unsuccessful API call
     .then((response) => {
-      
+      const syllableFilter = this.state.syllableFilter;
       const filterPunctuation = response.data.filter((hit) => {
-        return hit.word !== ".";
+        return hit.word !== "." && hit.numSyllables <= syllableFilter;
       })
       const wordOptionsArray = [];
       for(let i = 0; i < 7; i++){
@@ -149,8 +150,9 @@ class App extends Component {
   grabThree = ()=>{
     //a function to return words with syllables less than *4*
     const allBoatWords = [...this.state.allBoatWords];
+    const syllableFilter = this.state.syllableFilter;
     const filterdSyllables = allBoatWords.filter(result => {
-        return result.numSyllables < 4
+      return result.numSyllables <= syllableFilter;
       } )
     //a variable for the top three random words
     const topThree = [];
@@ -226,28 +228,40 @@ class App extends Component {
   }
   
   distributeSyllables = () => {
-     const wholeHaiku = [...this.state.wholeHaiku];
-     const lineOne =[];
-     const lineTwo =[];
-     const lineThree= [];
-      wholeHaiku.forEach((count, i) => {
-        const haikuSlice = wholeHaiku.slice(0, i+1);
-        const sliceSyllables = this.countSyllables(haikuSlice);
-       
+    const wholeHaiku = [...this.state.wholeHaiku];
+    const lineOne =[];
+    const lineTwo =[];
+    const lineThree= [];
+    let syllableFilter = 4;
 
-        if (sliceSyllables < 6){
-          lineOne.push(wholeHaiku[i]);
-        } else if (sliceSyllables < 13){
-          lineTwo.push(wholeHaiku[i])
-        }else if (sliceSyllables < 18){
-          lineThree.push(wholeHaiku[i])
-        }
-          
-  })
+    wholeHaiku.forEach((count, i) => {
+      const haikuSlice = wholeHaiku.slice(0, i+1);
+      const sliceSyllables = this.countSyllables(haikuSlice);
+      
+
+      if (sliceSyllables < 6){
+        lineOne.push(wholeHaiku[i]);
+        syllableFilter = 5 - this.countSyllables(lineOne);
+        console.log("filter", syllableFilter)
+      } else if (sliceSyllables < 13){
+        lineTwo.push(wholeHaiku[i])
+        syllableFilter = 7 - this.countSyllables(lineTwo);
+        console.log("filterTwo", syllableFilter)
+      }else if (sliceSyllables < 18){
+        lineThree.push(wholeHaiku[i])
+        syllableFilter = 5 - this.countSyllables(lineThree);
+        console.log("filter3", syllableFilter)
+      } 
+      if (syllableFilter < 1){
+        syllableFilter = 4;
+      }
+      
+    })
    this.setState({
      lineOne: lineOne,
      lineTwo: lineTwo,
      lineThree: lineThree,
+     syllableFilter: syllableFilter,
    })
 }
   
