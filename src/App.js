@@ -284,76 +284,89 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <section className="wrapperBig">
+        <div className="wrapperBig">
           <Instructions />
-          <form className="wrapperSmall" action="submit">
-            <label htmlFor="word">Input Starting Word Here</label>
-            <input onChange={this.handleChange} value={this.state.seedWord} id="word" name="word" type="text" />
-            <button disabled={this.state.wholeHaiku.length > 0 ? true : false } onClick={this.handleClick}>Submit</button>
-          </form>
-        </section>
-
-        <section className="userName">
-          <div className="wrapperSmall nextWordOption">
-          <h2>Word Options</h2>
-            <ul>
-              {/* //mapping over the wordOptions array and displaying to the page  */}
-              {this.state.wordOptions.map((result, i) => {
-                return (
-                  // Creating an onClick listener for each button appended to the page 
-                  <li key={i}><button  onClick={(event) => { this.buttonWordChoice(event, i)} } className="wordButton">
-                  {result.word}
-                  </button></li>
-                )
-              })}
-            </ul>
-
-          </div>
-
-        </section>
-          <div className="wrapperSmall">
-
-            <h2>Haiku</h2>
-            <div className="Flex-Parent">
-            
-              <div className="lines">
-                <h3>Line One</h3>
-                <ul>
-                  {this.state.lineOne.map((result, i) => {
-                    return (<li key={i}>{result.word}</li>)
-                    }
-                  )}
-                </ul>
-              </div>
-              <div>
-                <h3>Line Two</h3>
-                <ul>
-                  {this.state.lineTwo.map((result, i) => {
-                    return (<li key={i}>{result.word}</li>)
-                  }
-                  )}
-                </ul>
-              </div>
-              <div>
-                <h3>Line Three</h3>
-                <ul>
-                  {this.state.lineThree.map((result, i) => {
-                    return (<li key={i}>{result.word}</li>)
-                  }
-                  )}
-                </ul>
-              </div>
-              <div>
-                <h3>Whole Haiku</h3>
-                <ul>
-                  {this.state.wholeHaiku.map((result, i) => {
-                    return (<li key={i}>{result.word}</li>)
-                  }
-                  )}
-                </ul>
-              </div>
+          <section className="container">
+            <div className="form">
+              <form className="wrapperSmall" action="submit">
+                <label htmlFor="word">Input Starting Word Here</label>
+                <input onChange={this.handleChange} value={this.state.seedWord} id="word" name="word" type="text" />
+                <button disabled={this.state.wholeHaiku.length > 0 ? true : false } onClick={this.handleClick}>Submit</button>
+              </form>
+            {/* form */}
             </div>
-          </div>
+            {/* container */}
+          </section>
+          <section className="container">
+            <div className="nextWordOption">
+              <div className="wrapperSmall">
+                <h2>Word Options</h2>
+                  <ul>
+                    {/* //mapping over the wordOptions array and displaying to the page  */}
+                    {this.state.wordOptions.map((result, i) => {
+                      return (
+                        // Creating an onClick listener for each button appended to the page 
+                        <li key={i}><button  onClick={(event) => { this.buttonWordChoice(event, i)} } className="wordButton">
+                        {result.word}
+                        </button></li>
+                      )
+                    })}
+                  </ul>
+              {/* wrapperSmall */}
+              </div>
+              {/* nextWordOption */}
+            </div>
+          {/*container */}
+          </section>
+          <section className="container">
+            <div className="haikus">
+              <div className="wrapperSmall">
+                <h2>Haiku</h2>
+                <div className="Flex-Parent">
+                
+                  <div className="lines">
+                    <h3>Line One</h3>
+                    <ul>
+                      {this.state.lineOne.map((result, i) => {
+                        return (<li key={i}>{result.word}</li>)
+                        }
+                      )}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3>Line Two</h3>
+                    <ul>
+                      {this.state.lineTwo.map((result, i) => {
+                        return (<li key={i}>{result.word}</li>)
+                      }
+                      )}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3>Line Three</h3>
+                    <ul>
+                      {this.state.lineThree.map((result, i) => {
+                        return (<li key={i}>{result.word}</li>)
+                      }
+                      )}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3>Whole Haiku</h3>
+                    <ul>
+                      {this.state.wholeHaiku.map((result, i) => {
+                        return (<li key={i}>{result.word}</li>)
+                      }
+                      )}
+                    </ul>
+                  </div>
+                </div>
+              {/* wrapperSmall */}
+            </div>
+            {/* haikus */}
+            </div>
+          </section>
+          {/* WrapperBig */}
         </div>
       </Router>
     );
