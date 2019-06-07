@@ -64,6 +64,11 @@ span {
   justify-content: center;
 }
 
+.flexParent {
+  display: flex;
+  justify-content: space-around;
+}
+
 @media (min-width: 700px) {
   span {
     display: inline;
