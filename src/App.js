@@ -69,7 +69,8 @@ class App extends Component {
         this.setState({
           wholeHaiku: newFirstLine,
           seedWord: ''
-        });
+        },
+          this.distributeSyllables);
         // if the user's word has too many syllables, prompt an error
       } else if (seedWord === word && numSyllables > 5) {
         
@@ -207,9 +208,16 @@ class App extends Component {
     const wholeHaiku = [...this.state.wholeHaiku]
     //creating a variable for the new word
     const newWord = this.state.wordOptions[index]
+
+    // const buttonReveal = () => {
+    //   document.getElementById('removeButton').show();
+    // }
+
+    // buttonReveal();
    
     //push the new word to the wholeHaiku array
     wholeHaiku.push(newWord)
+    
     //set state so that wholeHaiku is the new wholeHaiku and seedWord is the newWord's property of word
     this.setState ({
       wholeHaiku: wholeHaiku,
@@ -279,40 +287,119 @@ class App extends Component {
      syllableFilter: syllableFilter,
    })
 }
-  
+
+removeLastWord = () => {
+  const wholeHaikuCopy = [...this.state.wholeHaiku];
+  wholeHaikuCopy.pop();
+  this.setState({
+    wholeHaiku: wholeHaikuCopy,
+  },
+    this.distributeSyllables)
+}  
 
   render() {
     return (
-      <Router>
-        <div className="wrapperBig">
-          <Instructions />
-          <section className="container">
-            <div className="form">
-              <form className="wrapperSmall" action="submit">
-                <label htmlFor="word">Input Starting Word Here</label>
-                <input onChange={this.handleChange} value={this.state.seedWord} id="word" name="word" type="text" />
-                <button disabled={this.state.wholeHaiku.length > 0 ? true : false } onClick={this.handleClick}>Submit</button>
-              </form>
-            {/* form */}
-            </div>
-            {/* container */}
-          </section>
-          <section className="container">
-            <div className="nextWordOption">
-              <div className="wrapperSmall">
-                <h2>Word Options</h2>
-                  <ul>
-                    {/* //mapping over the wordOptions array and displaying to the page  */}
-                    {this.state.wordOptions.map((result, i) => {
-                      return (
-                        // Creating an onClick listener for each button appended to the page 
-                        <li key={i}><button  onClick={(event) => { this.buttonWordChoice(event, i)} } className="wordButton">
-                        {result.word}
-                        </button></li>
-                      )
-                    })}
-                  </ul>
-              {/* wrapperSmall */}
+      <div>
+        <form action="submit">
+          <label htmlFor="word">Input Starting Word Here</label>
+          <input onChange={this.handleChange} value={this.state.seedWord} id="word" name="word" type="text" />
+          <button disabled={this.state.wholeHaiku.length > 0 ? true : false } onClick={this.handleClick}>Submit</button>
+        </form>
+
+        <div className="nextWordOption">
+        <h2>Word Options</h2>
+          <ul>
+            {/* //mapping over the wordOptions array and displaying to the page  */}
+            {this.state.wordOptions.map((result, i) => {
+              return (
+                // Creating an onClick listener for each button appended to the page 
+                <li key={i}><button  onClick={(event) => { this.buttonWordChoice(event, i)} } className="wordButton">
+                  {result.word}
+                </button></li>
+              )
+            })}
+          </ul>
+
+        </div>
+        <h2>Haiku</h2>
+        {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" onClick={this.removeLastWord}>Remove last item</button> : null}
+        <div className="Flex-Parent">
+         
+          <div className="lines">
+            <h3>Line One</h3>
+            <ul>
+              {this.state.lineOne.map((result, i) => {
+                return (<li key={i}>{result.word}</li>)
+                }
+              )}
+            </ul>
+          </div>
+          <div>
+            <h3>Line Two</h3>
+            <ul>
+              {this.state.lineTwo.map((result, i) => {
+                return (<li key={i}>{result.word}</li>)
+              }
+              )}
+            </ul>
+          </div>
+          <div>
+            <h3>Line Three</h3>
+            <ul>
+              {/* //mapping over the wordOptions array and displaying to the page  */}
+              {this.state.wordOptions.map((result, i) => {
+                return (
+                  // Creating an onClick listener for each button appended to the page 
+                  <li key={i}><button  onClick={(event) => { this.buttonWordChoice(event, i)} } className="wordButton">
+                  {result.word}
+                  </button></li>
+                )
+              })}
+            </ul>
+
+          </div>
+
+        </section>
+          <div className="wrapperSmall">
+
+            <h2>Haiku</h2>
+            <div className="Flex-Parent">
+            
+              <div className="lines">
+                <h3>Line One</h3>
+                <ul>
+                  {this.state.lineOne.map((result, i) => {
+                    return (<li key={i}>{result.word}</li>)
+                    }
+                  )}
+                </ul>
+              </div>
+              <div>
+                <h3>Line Two</h3>
+                <ul>
+                  {this.state.lineTwo.map((result, i) => {
+                    return (<li key={i}>{result.word}</li>)
+                  }
+                  )}
+                </ul>
+              </div>
+              <div>
+                <h3>Line Three</h3>
+                <ul>
+                  {this.state.lineThree.map((result, i) => {
+                    return (<li key={i}>{result.word}</li>)
+                  }
+                  )}
+                </ul>
+              </div>
+              <div>
+                <h3>Whole Haiku</h3>
+                <ul>
+                  {this.state.wholeHaiku.map((result, i) => {
+                    return (<li key={i}>{result.word}</li>)
+                  }
+                  )}
+                </ul>
               </div>
               {/* nextWordOption */}
             </div>
@@ -373,3 +460,5 @@ class App extends Component {
   }
 }
 export default App;
+
+{/* <i className="fas fa-check"></i> <i className="fas fa-times"></i> */}
