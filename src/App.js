@@ -59,8 +59,6 @@ class App extends Component {
         // pushes the word and number of syllables values of the user input word to the newWholeHaiku array
         newWholeHaiku.push({ 'word': word, 'numSyllables': numSyllables})
         this.getWordSuggestions(word); 
-        //counting the first word
-        const firstWordSyllableCount = this.countSyllables(newWholeHaiku);
         // sets state of wholeHaiku to be equal to the value of newWholeHaiku, reset user input to nothing 
         this.setState({
           wholeHaiku: newWholeHaiku,
@@ -72,6 +70,8 @@ class App extends Component {
         alert('Please think of a word that is less than 5 syllables');
         return;
         // error handling for if the user misspells their word
+      } else if (seedWord === "" && seedWord.numSyllables === 0) {
+        alert('Please enter a word')
       } else {
         alert(`It looks like you meant to type "${word}". Please try again.`);
         return;
@@ -217,7 +217,6 @@ class App extends Component {
         //call get word suggestions to repopulate the next word options 
         this.getWordSuggestions(newWord.word)
         //calling the function to count syllables
-        const currentSyllables = this.countSyllables(wholeHaiku)
         this.distributeSyllables();
       }
     )
