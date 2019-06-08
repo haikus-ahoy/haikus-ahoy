@@ -353,7 +353,7 @@ removeLastWord = () => {
                     </ul>
                     {/* lines */}
                   </div>
-                  <div classNam="lines">
+                  <div className="lines">
                     <h3>Line Two</h3>
                     <ul>
                       {this.state.lineTwo.map((result, i) => {
