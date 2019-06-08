@@ -257,15 +257,12 @@ class App extends Component {
       if (sliceSyllables < 6){
         lineOne.push(wholeHaiku[i]);
         syllableFilter = 5 - this.countSyllables(lineOne);
-        console.log("filter", syllableFilter)
       } else if (sliceSyllables < 13){
         lineTwo.push(wholeHaiku[i])
         syllableFilter = 7 - this.countSyllables(lineTwo);
-        console.log("filterTwo", syllableFilter)
       }else if (sliceSyllables < 18){
         lineThree.push(wholeHaiku[i])
         syllableFilter = 5 - this.countSyllables(lineThree);
-        console.log("filter3", syllableFilter)
       } 
       //when the syllable filter is less than 1, rest to 0 so the user wil be given options for the next line
       if (syllableFilter < 1){
@@ -285,15 +282,65 @@ class App extends Component {
 removeLastWord = () => {
   const wholeHaikuCopy = [...this.state.wholeHaiku];
   wholeHaikuCopy.pop();
-  const newLastWord = wholeHaikuCopy[wholeHaikuCopy.length - 1].word;
   this.setState({
     wholeHaiku: wholeHaikuCopy,
   },
-    () => {
-      this.distributeSyllables();
-      this.getWordSuggestions(newLastWord);
-    })
+  () => {
+    this.distributeSyllables();
+    if (wholeHaikuCopy.length === 0) {
+      this.setState({
+        wordOptions: [],
+      })
+      return null;
+    }
+    const newLastWord = wholeHaikuCopy[wholeHaikuCopy.length - 1].word;
+    this.getWordSuggestions(newLastWord);
+  })
 }  
+
+syllableDisplay (currentLine) {
+  const lineOneFull = this.countSyllables(this.state.lineOne) === 5;
+  const lineTwoFull = this.countSyllables(this.state.lineTwo) === 7;
+  const lineThreeFull = this.countSyllables(this.state.lineThree) === 5;
+  
+  if (lineOneFull && lineTwoFull && lineThreeFull) {
+    // all lines remove syllable display
+    return ([])
+  } else if (lineOneFull && lineTwoFull && !lineThreeFull) {
+    if (currentLine === this.state.lineThree) {
+      // count current syllables remaining
+      const syllablesRemain = 5 - this.countSyllables(currentLine);
+
+      // return lineThree's display here
+      return <div><p>{syllablesRemain + " syllables remain"}</p></div>
+    } else {
+      // don't return lineOne or lineTwo's displays here
+      return ([]);
+    }
+  } else if (lineOneFull && !lineTwoFull) {
+    if (currentLine === this.state.lineTwo) {
+
+      const syllablesRemain = 7 - this.countSyllables(currentLine);
+
+      // return lineThree's display here
+      return <div><p>{syllablesRemain + " syllables remain"}</p></div>
+    } else {
+      // don't return lineOne or lineThree's displays here
+      return ([]);
+    }
+  } else if (!lineOneFull) {
+    if (currentLine === this.state.lineOne) {
+      const syllablesRemain = 5 - this.countSyllables(currentLine);
+
+      // return lineThree's display here
+      return <div><p>{syllablesRemain + " syllables remain"}</p></div>
+    } else {
+      return ([]);
+    }
+    
+  }
+  
+}
 
   render() {
     return (
@@ -324,7 +371,7 @@ removeLastWord = () => {
                     {this.state.wordOptions.map((result, i) => {
                     return (
                         // Creating an onClick listener for each button appended to the page 
-                        <li key={i}><button  onClick={(event) => { this.buttonWordChoice(event, i)} } className="wordButton">
+                        <li key={i}><button disabled={this.countSyllables(this.state.wholeHaiku)>= 17 ? true : false}  onClick={(event) => { this.buttonWordChoice(event, i)} } className="wordButton">
                           {result.word}
                         </button></li>
                       )
@@ -351,6 +398,9 @@ removeLastWord = () => {
                         return (<li key={i}>{result.word}</li>)
                       })}
                     </ul>
+                    {
+                      this.syllableDisplay(this.state.lineOne)
+                    }
                     {/* lines */}
                   </div>
                   <div className="lines">
@@ -361,6 +411,9 @@ removeLastWord = () => {
                       }
                       )}
                     </ul>
+                    {
+                      this.syllableDisplay(this.state.lineTwo)
+                    }
                   </div>
                   <div className="lines">
                     <h3>Line Three</h3>
@@ -370,6 +423,12 @@ removeLastWord = () => {
                       }
                       )}
                     </ul>
+                    {
+                      this.syllableDisplay(this.state.lineThree)
+                    }
+                  </div>
+                  <div>
+                    {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button>Click to see whole poem</button> : null}
                   </div>
                   <div className="wholeHaiku">
                     <h3>Whole Haiku</h3>
@@ -379,6 +438,8 @@ removeLastWord = () => {
                       }
                       )}
                     </ul>
+                    
+                    {/* {this.countSyllables(this.state.wholeHaiku) === 17 ? console.log("true") : console.log("false") } */}
                   </div>
                 </div>
               {/* wrapperSmall */}
