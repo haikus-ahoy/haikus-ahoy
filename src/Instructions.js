@@ -4,7 +4,7 @@ class Instructions extends Component {
     render() {
 
         return(
-            <header className="container"> 
+            <header > 
                 <div className="Wrapper">
                     <h1>Haikus Ahoy!</h1>
                     <p><span>Ahoy thar Matey!</span> Welcome aboard our boat-themed haiku generator of the High Seas. <span>Argh!</span></p>

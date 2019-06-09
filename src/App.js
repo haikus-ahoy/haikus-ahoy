@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import boatBack from './boatBack.svg';
 import Instructions from './Instructions.js';
 import {
 BrowserRouter as Router,
@@ -315,7 +316,7 @@ syllableDisplay (currentLine) {
       // count current syllables remaining
       const syllablesRemain = 5 - this.countSyllables(currentLine);
       // return lineThree's display here
-      return <div><p>{syllablesRemain + " syllables remain"}</p></div>
+      return <div><p>{"You are on Line Three. " +syllablesRemain + " syllables remain"}</p></div>
     } else {
       // don't return lineOne or lineTwo's displays here
       return ([]);
@@ -325,8 +326,8 @@ syllableDisplay (currentLine) {
     if (currentLine === this.state.lineTwo) {
       //count current syllables remaining 
       const syllablesRemain = 7 - this.countSyllables(currentLine);
-      // return lineThree's display here
-      return <div><p>{syllablesRemain + " syllables remain"}</p></div>
+      // return lineTwo's display here
+      return <div><p>{"You are on Line Two. " + syllablesRemain + " syllables remain"}</p></div>
     } else {
       // don't return lineOne or lineThree's displays here
       return ([]);
@@ -336,8 +337,8 @@ syllableDisplay (currentLine) {
     if (currentLine === this.state.lineOne) {
       const syllablesRemain = 5 - this.countSyllables(currentLine);
 
-      // return lineThree's display here
-      return <div><p>{syllablesRemain + " syllables remain"}</p></div>
+      // return lineOne's display here
+      return <div><p>{"You are on Line One. " + syllablesRemain + " syllables remain"}</p></div>
     } else {
       return ([]);
     }
@@ -349,14 +350,15 @@ syllableDisplay (currentLine) {
   render() {
     return (
       <Router>
+        
         <div className="Wrapper">
           <Instructions />
           <div className="form">
             <div className="container">
               <div className="Wrapper">
                 <form action="submit">
-                  <label htmlFor="word">Input Starting Word Here</label>
-                  <input onChange={this.handleChange} value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/>
+                  <label htmlFor="word" className="visuallyHidden">Input Starting Word Here</label>
+                  <input onChange={this.handleChange} placeholder="Enter your Starting Word" value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/>
                   <button disabled={this.state.wholeHaiku.length > 0 ? true : false } onClick={this.handleClick}>Submit</button>
                 </form>
                 {/* wrapperSmall */}
@@ -366,38 +368,17 @@ syllableDisplay (currentLine) {
             {/* form */}
           </div>
 
-          <div className="nextWordOption">
-            <div className="containter">
-              <div className="Wrapper">
-                <h2>Word Options</h2>
-                  <ul>
-                    {/* //mapping over the wordOptions array and displaying to the page  */}
-                    {this.state.wordOptions.map((result, i) => {
-                    return (
-                        // Creating an onClick listener for each button appended to the page 
-                        <li key={i}><button disabled={this.countSyllables(this.state.wholeHaiku)>= 17 ? true : false}  onClick={(event) => { this.buttonWordChoice(event, i)} } className="wordButton">
-                          {result.word}
-                        </button></li>
-                      )
-                    })}
-                  </ul>
-                {/* wrapperSmall */}
-              </div>
-              {/* container */}
-            </div>
-          {/* nextwordoption */}
-          </div>
+        
           <div className="haiku">
-            <div className="container">
-              <div className="Wrapper">
+          
 
                 <h2>Haiku</h2>
-                {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" onClick={this.removeLastWord}>Remove last item</button> : null}
+                {/* {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" onClick={this.removeLastWord}>Remove last item</button> : null} */}
                 <div className="flexParent">
               
                   <div className="lines">
-                    <h3>Line One</h3>
-                    <ul>
+                    
+                    <ul className="haikuUl">
                       {this.state.lineOne.map((result, i) => {
                         return (<li key={i}>{result.word}</li>)
                       })}
@@ -408,8 +389,8 @@ syllableDisplay (currentLine) {
                     {/* lines */}
                   </div>
                   <div className="lines">
-                    <h3>Line Two</h3>
-                    <ul>
+                    
+                <ul className="haikuUl">
                       {this.state.lineTwo.map((result, i) => {
                       return (<li key={i}>{result.word}</li>)
                       }
@@ -420,8 +401,8 @@ syllableDisplay (currentLine) {
                     }
                   </div>
                   <div className="lines">
-                    <h3>Line Three</h3>
-                    <ul>
+                    
+                <ul className="haikuUl">
                       {this.state.lineThree.map((result, i) => {
                         return (<li key={i}>{result.word}</li>)
                       }
@@ -431,10 +412,11 @@ syllableDisplay (currentLine) {
                       this.syllableDisplay(this.state.lineThree)
                     }
                   </div>
+                  {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" onClick={this.removeLastWord}>Remove last item</button> : null}
                   <div>
                     {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button>Click to see whole poem</button> : null}
                   </div>
-                  <div className="wholeHaiku">
+                  {/* <div className="wholeHaiku">
                     <h3>Whole Haiku</h3>
                     <ul>
                       {this.state.wholeHaiku.map((result, i) => {
@@ -443,17 +425,34 @@ syllableDisplay (currentLine) {
                       )}
                     </ul>
                     
+                  </div> */}
                     {/* {this.countSyllables(this.state.wholeHaiku) === 17 ? console.log("true") : console.log("false") } */}
-                  </div>
                 </div>
-              {/* wrapperSmall */}
-              </div>
-            {/* container */}
-            </div>
+            
           {/* haiku */}
-          </div>         
+          </div>   
+         
+          <div className="nextWordOption">
+            
+            
+                <h2>Word Options</h2>
+                
+                <ul className="suggestedWords">
+                  {/* //mapping over the wordOptions array and displaying to the page  */}
+                  {this.state.wordOptions.map((result, i) => {
+                    return (
+                      // Creating an onClick listener for each button appended to the page 
+                      <li key={i}><button disabled={this.countSyllables(this.state.wholeHaiku) >= 17 ? true : false} onClick={(event) => { this.buttonWordChoice(event, i) }} className="wordButton">
+                        {result.word}
+                      </button></li>
+                    )
+                  })}
+                </ul>
+           
+          </div>      
         {/* WrapperBig */}
         </div>
+        <img src={boatBack} className="Boat" alt="Boat" />
       </Router>
     );
   }

@@ -9,43 +9,42 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 html {
   font-size: 125%;
   margin: 0;
- 
+
 }
 body {
-   background: url('./boatBack.svg');
+  display: flex;
+   background: #004643;
    background-size: cover;
-   background-position: bottom;
+   background-position: bottom center;
    background-repeat: no-repeat;
-   height: 100vh;
+   width: 100vw;
+   
 }
+
 h1, h2, h3, h4, a, button, p, ul, li {
   margin: 0;
   padding: 0;
 
 }
 
-/* .container {
-  max-width: 1440px;
-  margin: 0 auto;
-} */
 
 .Wrapper{
-  width:  1240px;
+  width:  1440px;
   max-width: 80%;;
   min-width: 320px;
   margin: 0 auto;
+  border: 2px solid green;
 }
 
 /* Strip general styles */
 
-ul {
-  padding: 0;
-  margin: 0;
-}
 
 li {
   list-style: none;
+  width: calc(100% /5 - 10px);
+  margin: 5px;
 }
+
 
 button:focus {
   outline: 0;
@@ -59,13 +58,15 @@ h3,
 label {
   font-family: 'Kanit', sans-serif;
   font-weight: bold;
-  text-align: center;
+  text-align: center;;
+  color: #ffffb0;
 }
 
 p {
   font-family: 'Kanit', sans-serif;
   font-weight: light;
   text-align: left;
+  color: #4bff72;
 }
 
 span {
@@ -78,11 +79,59 @@ span {
   display: flex;
   justify-content: center;
 }
+.nextWordOption{
+  margin: 0 auto;
+  border: 1px solid red;
+}
+
 
 .flexParent {
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
 }
+
+.haikuUl{
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: center
+  
+}
+.suggestedWords{
+   padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: center
+}
+.wordButton{
+  padding: 5px 20px;
+  background: #004643;
+  border: 1px solid #4bff72;
+  color:#4bff72;
+  border-radius: 10px;
+  padding-left: 5px;
+  text-align: center;
+
+}
+.wordButton:hover{
+  transform: scale(1.4);
+}
+.nextWordOption{
+ position: relative;
+}
+.Boat {
+  position: absolute;
+  top: 30%;
+  right: 0;
+}
+/* form */
+
+
 
 @media (min-width: 700px) {
   span {
