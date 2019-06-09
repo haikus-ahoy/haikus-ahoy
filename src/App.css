@@ -9,15 +9,30 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 html {
   font-size: 125%;
   margin: 0;
+ 
+}
+body {
+   background: url('./boatBack.svg');
+   background-size: cover;
+   background-position: bottom;
+   background-repeat: no-repeat;
+   height: 100vh;
+}
+h1, h2, h3, h4, a, button, p, ul, li {
+  margin: 0;
+  padding: 0;
+
 }
 
-.container {
+/* .container {
   max-width: 1440px;
   margin: 0 auto;
-}
+} */
 
-.wrapperSmall {
-  width: 80%;
+.Wrapper{
+  width:  1240px;
+  max-width: 80%;;
+  min-width: 320px;
   margin: 0 auto;
 }
 

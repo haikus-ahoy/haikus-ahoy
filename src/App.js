@@ -349,11 +349,11 @@ syllableDisplay (currentLine) {
   render() {
     return (
       <Router>
-        <div className="wrapperBig">
+        <div className="Wrapper">
           <Instructions />
           <div className="form">
             <div className="container">
-              <div className="wrapperSmall">
+              <div className="Wrapper">
                 <form action="submit">
                   <label htmlFor="word">Input Starting Word Here</label>
                   <input onChange={this.handleChange} value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/>
@@ -368,7 +368,7 @@ syllableDisplay (currentLine) {
 
           <div className="nextWordOption">
             <div className="containter">
-              <div className="wrapperSmall">
+              <div className="Wrapper">
                 <h2>Word Options</h2>
                   <ul>
                     {/* //mapping over the wordOptions array and displaying to the page  */}
@@ -389,7 +389,7 @@ syllableDisplay (currentLine) {
           </div>
           <div className="haiku">
             <div className="container">
-              <div className="wrapperSmall">
+              <div className="Wrapper">
 
                 <h2>Haiku</h2>
                 {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" onClick={this.removeLastWord}>Remove last item</button> : null}
