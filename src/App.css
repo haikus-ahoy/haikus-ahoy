@@ -129,7 +129,7 @@ span {
 .flexParent {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: left;
   
 }
 .Haiku {
@@ -185,8 +185,8 @@ span {
 
 /* form */
 
-.Submit:disabled,
-.Submit[disabled]{
+button:disabled,
+button[disabled]{
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
