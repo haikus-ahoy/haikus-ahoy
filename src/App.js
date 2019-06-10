@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import Instructions from './Instructions.js';
 import {
 BrowserRouter as Router,
@@ -16,7 +17,6 @@ class App extends Component {
       lineThree:[],
       wholeHaiku: [],
       getUserWord: [],
-      userWord: '',
       seedWord: '',
       allBoatWords:[],
       wordOptions: [],
@@ -53,7 +53,6 @@ class App extends Component {
       // a variable to store the number of syllables value from the first entry in the array
       const numSyllables = response[0].numSyllables;
       // if the user input word is less than 6 syllables
-      const regEx = /^$|\s+/
       if (seedWord === word && numSyllables < 6) {
         // a variable that holds a copy of the line one array in state
         const newWholeHaiku = [...this.state.wholeHaiku];
@@ -66,23 +65,37 @@ class App extends Component {
           seedWord: ''
         },
           this.distributeSyllables);
-        // if the user's word has too many syllables, prompt an error
-      } else if (seedWord === "" || seedWord === " " || seedword === regEx.test(seedWord) ) {
-        alert('Please type in a word to get started!')
-      }
+      } 
+      // if the user's word has too many syllables, prompt an error
         else if (seedWord === word && numSyllables > 5) {
-        alert('Please think of a word that is less than 5 syllables');
+        Swal.fire({
+          type: 'error',
+          text: 'Please enter a word that is less than 5 syllables',
+        })
         return;
         // error handling for if the user misspells their word
-      } else if (!regEx.test(seedWord) ) {
-        alert('Please enter a word')
       } else {
-        alert(`It looks like you meant to type "${word}". Please try again.`);
+        Swal.fire({
+          type: 'error',
+          text: `It looks like you meant to type "${word}". Please try again.`,
+        })
         return;
       }
         // more error handling - if word cannot be found, or is spelled too incorrectly to be recognized
     }).catch((response) => {
-      alert(`Sorry, ${seedWord} is not a word that I know.`);
+      if (seedWord === undefined || seedWord === "" || seedWord ===" ") {
+        Swal.fire({
+          type: 'error',
+          text: `Please type in a word to get started.`,
+        })
+      } 
+      else {
+        Swal.fire({
+          type: 'error',
+          text: `Sorry, ${seedWord} is not a word that I know.`,
+        })
+      }
+      
     })
   }
 
