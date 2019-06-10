@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Modal from './Component/Modal.js';
 import Instructions from './Instructions.js';
 import {
 BrowserRouter as Router,
@@ -25,14 +26,22 @@ class App extends Component {
       lineTwoSyllables: 0,
       lineThreeSyllables: 0,
       syllableFilter: 4,
+      isShowing: false,
     }
     
   }
   //calling the function of the axios call for all the ship words that we pull three at a time from 
   componentDidMount(){
     this.getShipWords();
+    this.setState ({
+      isShowing:true,
+    })
   }
-  
+  closeModalHandler = () => {
+    this.setState({
+      isShowing: false
+    });
+  }
   // function to get the user input, which makes the API call to the Datamuse API
   getUserWord = () => {
     const seedWord = this.state.seedWord.toLowerCase();
@@ -351,9 +360,20 @@ syllableDisplay (currentLine) {
       <Router>
         
         <div className="Wrapper">
-          <Instructions />
+          {/* <Instructions /> */}
           
+          <div className="Modal">
+            {this.state.isShowing ? <div onClick={this.closeModalHandler} className="back-drop"></div> : null}
 
+            {/* <button className="open-modal-btn" onClick={this.openModalHandler}>Open Modal</button> */}
+
+            <Modal
+              className="modal"
+              show={this.state.isShowing}
+              close={this.closeModalHandler}>
+              <Instructions />
+                </Modal>
+          </div>
          
           <div className="Form">
            
