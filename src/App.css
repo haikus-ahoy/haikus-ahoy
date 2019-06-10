@@ -23,12 +23,17 @@ h1, h2, h3, h4, a, button, p, ul, li {
 
 }
 
+/* This was giving a hard width so that's why we had to target it with an id */
+
+#root {
+  width: 100%;
+}
 
 .Wrapper{
-  width:  1440px;
-  max-width: 80%;;
-  min-width: 320px;
+  max-width: 1440px;
+  width: 80%;
   margin: 0 auto;
+  min-width: 320px;
  
 }
 
@@ -53,7 +58,7 @@ h3,
 label {
   font-family: 'Kanit', sans-serif;
   font-weight: bold;
-  text-align: center;;
+  text-align: center;
  
 }
 h2, 
@@ -63,7 +68,8 @@ label {
  
 }
 h1{
-   color: #004643;
+  font-size: 3rem;
+   color: #ffffb0;
    text-shadow: 2px 1px #4bff72
 }
 h4{
@@ -80,19 +86,27 @@ button{
   background: #4bff72;
   border-radius: 15px;
   padding: 5px 20px;
+  font-size: 1.4rem;
 }
 
 p {
   font-family: 'Kanit', sans-serif;
   font-weight: light;
   color: #4bff72;
+  font-size: 1.4rem;
 }
 
 span {
-  display: none;
+  display: inline;
 }
 
+/* Instructions styles */
 
+.Instructions {
+  width: 70%;
+  margin: 0 auto;
+  padding-top: 50px;
+}
 
 .Instructions p{
   color: #ffffb0;
@@ -113,6 +127,25 @@ span {
 .nextWordOption{
   margin: 0 auto;
 }
+
+/* Header styles */
+header {
+  height: 100vh;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+form input {
+  margin: 100px;
+}
+
+/* Haiku Styles */
 
 
 .flexParent {
@@ -190,7 +223,7 @@ button[disabled]{
   background: #ffffb0;
 }
 .Submit{
-  height: 40px;
+
   margin-left: 20px;
 }
 .Form {
@@ -202,6 +235,7 @@ button[disabled]{
   text-align: center;
   color: #004643;
   font-size: 1rem;
+  opacity: 1;
 }
 /* Modal */
 .Modal {
@@ -216,12 +250,11 @@ button[disabled]{
 .modalWrapper {
   background: url('./modal.svg');
   background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
-  
-    border-radius: 20px; 
-    transition: all .8s;
-    height: 100vh;
-    width: 100vw;
+  transition: all .8s;
+  height: 100vh;
+  width: 100vw;
    
 }
 .instructionWrapper{
@@ -237,8 +270,37 @@ button[disabled]{
 }
 
 
-@media (min-width: 700px) {
+@media (max-width: 1000px) {
+  p {
+    font-size: 1.2rem;
+  }
+
+}
+
+@media (max-width: 680px) {
   span {
-    display: inline;
+    display: none;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .Input {
+    width: 60%;
+  }
+}
+
+@media (max-width: 475px) {
+  p {
+    font-size: 1rem;
+  }
+
+  .Instructions {
+    width: 90%;
+  }
+
+  .Input {
+    width: 100%;
   }
 }

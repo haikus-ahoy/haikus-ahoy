@@ -5,9 +5,6 @@ import Modal from './Modal.js';
 import Swal from 'sweetalert2';
 import Instructions from './Instructions.js';
 import FinishedHaiku from './Component/FinishedHaiku';
-import {
-BrowserRouter as Router,
-Route, Link} from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
@@ -329,6 +326,7 @@ class App extends Component {
   //creating a function to display the syllable count 
   syllableDisplay (currentLine) {
     //creating a boolean for when each line is full 
+    const lineOneEmpty = this.countSyllables(this.state.lineOne) === 0;
     const lineOneFull = this.countSyllables(this.state.lineOne) === 5;
     const lineTwoFull = this.countSyllables(this.state.lineTwo) === 7;
     const lineThreeFull = this.countSyllables(this.state.lineThree) === 5;
@@ -360,12 +358,14 @@ class App extends Component {
         return ([]);
       }
       //if line one is not full then display line one syllable count 
+    } else if (lineOneEmpty === true) {
+      return ([]);
     } else if (!lineOneFull) {
       if (currentLine === this.state.lineOne) {
         const syllablesRemain = 5 - this.countSyllables(currentLine);
-
         // return lineOne's display here
         return <div><p>{"You are on Line One. " + syllablesRemain + " syllables remain"}</p></div>
+
       } else {
         return ([]);
       }
@@ -390,8 +390,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-  
+
 
         <div className="Wrapper">
          <header>
@@ -421,9 +420,7 @@ class App extends Component {
           <div className="Container">
             <div className="Haiku">
             
-
-                  <h2>Haiku</h2>
-                  {/* {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" onClick={this.removeLastWord}>Remove last item</button> : null} */}
+            {this.state.wholeHaiku.length > 0 ? <h2 onClick={this.removeLastWord}>Haiku</h2> : null}
                   <div className="flexParent">
                 
                     <div className="lines">
@@ -499,26 +496,26 @@ class App extends Component {
           <div className="nextWordOption">
             
             
-                <h2>Word Options</h2>
                 
-                <ul className="suggestedWords">
-                  {/* //mapping over the wordOptions array and displaying to the page  */}
-                  {this.state.wordOptions.map((result, i) => {
-                    return (
-                      // Creating an onClick listener for each button appended to the page 
-                      <li key={i}><button disabled={this.countSyllables(this.state.wholeHaiku) >= 17 ? true : false} onClick={(event) => { this.buttonWordChoice(event, i) }} className="wordButton">
-                        {result.word}
-                      </button></li>
-                    )
-                  })}
-                </ul>
+               
+            <ul className="suggestedWords">
+              {/* //mapping over the wordOptions array and displaying to the page  */}
+              {this.state.wordOptions.map((result, i) => {
+                return (
+                  // Creating an onClick listener for each button appended to the page 
+                  <li key={i}><button disabled={this.countSyllables(this.state.wholeHaiku) >= 17 ? true : false} onClick={(event) => { this.buttonWordChoice(event, i) }} className="wordButton">
+                    {result.word}
+                  </button></li>
+                )
+              })}
+            </ul>
             {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" onClick={this.removeLastWord}>Remove last item</button> : null}
           </div>    
           {this.state.showFinishedHaiku ? <FinishedHaiku convertHaikuToString={this.convertHaikuToString}/> : null}  
         {/* WrapperBig */}
         </div>
         </div>
-      </Router>
+ 
     );
   }
 }
