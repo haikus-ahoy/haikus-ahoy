@@ -27,6 +27,7 @@ class App extends Component {
       lineTwoSyllables: 0,
       lineThreeSyllables: 0,
       syllableFilter: 4,
+      showFinishedHaiku: false,
     }
     
   }
@@ -350,7 +351,7 @@ class App extends Component {
     }
   }
 
-  handleClickWholePoem = () => {
+  convertHaikuToString = () => {
     // map through lines of haiku, extracting strings from 'word objects'
     const linesAsArraysOfStrings = [
       [...this.state.lineOne].map(elt => elt.word),
@@ -364,8 +365,6 @@ class App extends Component {
     return linesAsArraysOfStrings.reduce((total, currentLine) => {
       return total = total + '\n' + currentLine.join(' ');
     }, '')
-    
-    
   }
 
   render() {
@@ -432,7 +431,7 @@ class App extends Component {
                   </div>
                   
                   <div>
-                    {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button onClick={this.handleClickWholePoem}>Click to see whole poem</button> : null}
+                    {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button onClick={() => {this.setState({showFinishedHaiku: true})}}>Click to see whole poem</button> : null}
                   </div>
                   {/* <div className="wholeHaiku">
                     <h3>Whole Haiku</h3>
@@ -468,7 +467,7 @@ class App extends Component {
                 </ul>
             {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" onClick={this.removeLastWord}>Remove last item</button> : null}
           </div>    
-          <FinishedHaiku />  
+          {this.state.showFinishedHaiku ? <FinishedHaiku convertHaikuToString={this.convertHaikuToString}/> : null}  
         {/* WrapperBig */}
         </div>
         </div>
