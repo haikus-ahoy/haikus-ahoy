@@ -16,7 +16,6 @@ class App extends Component {
       lineThree:[],
       wholeHaiku: [],
       getUserWord: [],
-      userWord: '',
       seedWord: '',
       allBoatWords:[],
       wordOptions: [],
@@ -66,23 +65,25 @@ class App extends Component {
           seedWord: ''
         },
           this.distributeSyllables);
-        // if the user's word has too many syllables, prompt an error
-      } else if (seedWord === "" || seedWord === " " || seedword === regEx.test(seedWord) ) {
-        alert('Please type in a word to get started!')
-      }
+      } 
+      // if the user's word has too many syllables, prompt an error
         else if (seedWord === word && numSyllables > 5) {
-        alert('Please think of a word that is less than 5 syllables');
+        alert(`Please think of a word that is less than 5 syllables`);
         return;
         // error handling for if the user misspells their word
-      } else if (!regEx.test(seedWord) ) {
-        alert('Please enter a word')
       } else {
         alert(`It looks like you meant to type "${word}". Please try again.`);
         return;
       }
         // more error handling - if word cannot be found, or is spelled too incorrectly to be recognized
     }).catch((response) => {
-      alert(`Sorry, ${seedWord} is not a word that I know.`);
+      if (seedWord === undefined || seedWord === "" || seedWord ===" ") {
+        alert(`Please type in a word to get started`);
+      } 
+      else {
+        alert(`Sorry, ${seedWord} is not a word that I know.`); 
+      }
+      
     })
   }
 
