@@ -7,6 +7,7 @@ class FinishedHaiku extends Component {
     
         this.state = {
             completedHaiku: '',
+            haikuKeys: [],
         }
     }
 
@@ -16,6 +17,27 @@ class FinishedHaiku extends Component {
             completedHaiku: haikuString,
         })
         console.log(this.props.renderedHaiku);
+
+        const dbRef = firebase.database().ref('/userHaikus');
+
+        // this sort of works, but the firebase docs are a mess
+        const haikuKeys = [];
+        dbRef.orderByKey().on('child_added', (dataSnapshot) => {
+            console.log(dataSnapshot.key);
+            haikuKeys.push(dataSnapshot.key);
+
+            // dataSnapshot.forEach(haiku => firebaseArray.push(haiku));
+            // console.log(firebaseArray);
+
+            // const userHaikusLength = dataSnapshot.numChildren();
+            // const randomIndex = Math.floor(Math.random() * userHaikusLength);
+            // console.log(randomIndex);
+        });
+
+        this.setState({
+            haikuKeys: haikuKeys,
+        });
+        console.log('HIIIIII', haikuKeys);
     }
 
     // function to save the completed haiku to Firebase
