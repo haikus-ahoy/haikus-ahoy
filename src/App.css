@@ -14,10 +14,6 @@ html {
 }
 body {
   display: flex;
-   background-size: contain;
-   background-position:  center;
-   background-repeat: no-repeat;
-   width: 100vh;
    
 }
 
@@ -41,7 +37,6 @@ h1, h2, h3, h4, a, button, p, ul, li {
 
 li {
   list-style: none;
-  width: calc(100% /5 - 10px);
   margin: 5px;
 }
 
@@ -97,20 +92,14 @@ span {
   display: none;
 }
 
-/* Instructions */
-.Instructions{
-  background: #ffffb0;
-  color: #004643;
-  border-bottom-right-radius: 40px;
-  border-bottom-left-radius: 40px;
 
-}
+
 .Instructions p{
-  /* color: #ffffb0; */
-  color: #004643;
+  color: #ffffb0;
   text-align: justify;
   margin-top: 10px;
   padding: 5px 20px;
+  text-align: center;
 }
 
 .buttonContainer {
@@ -160,7 +149,6 @@ span {
   border: 1px solid #4bff72;
   color:#4bff72;
   border-radius: 10px;
-  padding-left: 5px;
   text-align: center;
 
 }
@@ -175,12 +163,15 @@ span {
   top: 30%;
   right: 0;
 }
-#removeLastItem{
+.removeLastItem{
+ margin: 20px 0;
+ display: flex;
+ justify-content: center;
+}
+.removeLastItem button {
+  width: 30%;
   background: #4bff72;
-  position: absolute;
-  bottom: -60%;
-  left: 50%;
-  transform: translate(-50%, -50%)
+
 }
 
 /* form */
@@ -212,6 +203,39 @@ button[disabled]{
   color: #004643;
   font-size: 1rem;
 }
+/* Modal */
+.Modal {
+  position: absolute;
+  
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+ 
+}
+.modalWrapper {
+  background: url('./modal.svg');
+  background-position: center;
+  background-size: cover;
+  
+    border-radius: 20px; 
+    transition: all .8s;
+    height: 100vh;
+    width: 100vw;
+   
+}
+.instructionWrapper{
+  background: #004643;
+
+}
+.btnCancel {
+    background-color:  #4bff72;
+    color: #004643;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
 
 @media (min-width: 700px) {
   span {
