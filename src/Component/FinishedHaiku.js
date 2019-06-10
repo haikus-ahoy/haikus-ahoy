@@ -24,19 +24,11 @@ class FinishedHaiku extends Component {
         dbRef.push(this.props.convertHaikuToString());
     }
 
-    // bindInput = (event) => {
-    //     this.setState({
-    //         completedHaiku: event.target.value,
-    //     })
-    // }
-
     render() {
         return(
             <div>
                 <p>{this.props.renderedHaiku}</p>
                 <button onClick={this.saveHaikuToFirebase}>save haiku</button>
-
-                {/* <input type="text" onChange={this.bindInput}/> */}
             </div>
         )
     }

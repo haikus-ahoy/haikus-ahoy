@@ -522,7 +522,7 @@ class App extends Component {
                 )
               })}
             </ul>
-            {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" onClick={this.removeLastWord}>Remove last item</button> : null}
+            {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" disabled={this.state.showFinishedHaiku} onClick={this.removeLastWord}>Remove last item</button> : null}
           </div>    
             {this.state.showFinishedHaiku ? <FinishedHaiku renderedHaiku={this.renderHaiku()} convertHaikuToString={this.convertHaikuToString}/> : null}  
         {/* WrapperBig */}
