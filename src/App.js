@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+// import firebase from './firebase';
 import Swal from 'sweetalert2';
 import Instructions from './Instructions.js';
+import FinishedHaiku from './Component/FinishedHaiku';
 import {
 BrowserRouter as Router,
 Route, Link} from 'react-router-dom';
@@ -25,6 +27,7 @@ class App extends Component {
       lineTwoSyllables: 0,
       lineThreeSyllables: 0,
       syllableFilter: 4,
+      showFinishedHaiku: false,
     }
     
   }
@@ -65,9 +68,8 @@ class App extends Component {
           seedWord: ''
         },
           this.distributeSyllables);
-      } 
-      // if the user's word has too many syllables, prompt an error
-        else if (seedWord === word && numSyllables > 5) {
+        // if the user's word has too many syllables, prompt an error
+      } else if (seedWord === word && numSyllables > 5) {
         Swal.fire({
           type: 'error',
           text: 'Please enter a word that is less than 5 syllables',
@@ -213,7 +215,7 @@ class App extends Component {
     }) 
   }
 
-//adds the selected button to the line one array
+  //adds the selected button to the line one array
   buttonWordChoice = (event, index) => {
     //event prevent default
     event.preventDefault();
@@ -288,80 +290,94 @@ class App extends Component {
      lineThree: lineThree,
      syllableFilter: syllableFilter,
    })
-}
-
-//creating a function to remove the last word in the Haiku if the user wants 
-removeLastWord = () => {
-  //copying Haiku
-  const wholeHaikuCopy = [...this.state.wholeHaiku];
-  //removing last word
-  wholeHaikuCopy.pop();
-  //set state to the Haiku without the last word 
-  this.setState({
-    wholeHaiku: wholeHaikuCopy,
-  },
-  //make sure it won't crash if the user exits back to the first word 
-  () => {
-    this.distributeSyllables();
-    if (wholeHaikuCopy.length === 0) {
-      this.setState({
-        wordOptions: [],
-      })
-      return null;
-    }
-    //calling the API to get word suggestions 
-    const newLastWord = wholeHaikuCopy[wholeHaikuCopy.length - 1].word;
-    this.getWordSuggestions(newLastWord);
-  })
-}  
-
-//creating a function to display the syllable count 
-syllableDisplay (currentLine) {
-  //creating a boolean for when each line is full 
-  const lineOneFull = this.countSyllables(this.state.lineOne) === 5;
-  const lineTwoFull = this.countSyllables(this.state.lineTwo) === 7;
-  const lineThreeFull = this.countSyllables(this.state.lineThree) === 5;
-  
-  //creating conditions for displaying the syllable counts
-  if (lineOneFull && lineTwoFull && lineThreeFull) {
-    // all lines remove syllable display
-    return ([])
-    //if lines one and two are full and we're on the third line
-  } else if (lineOneFull && lineTwoFull && !lineThreeFull) {
-    if (currentLine === this.state.lineThree) {
-      // count current syllables remaining
-      const syllablesRemain = 5 - this.countSyllables(currentLine);
-      // return lineThree's display here
-      return <div><p>{"You are on Line Three. " +syllablesRemain + " syllables remain"}</p></div>
-    } else {
-      // don't return lineOne or lineTwo's displays here
-      return ([]);
-    }
-    //if line one is full and we're on line two 
-  } else if (lineOneFull && !lineTwoFull) {
-    if (currentLine === this.state.lineTwo) {
-      //count current syllables remaining 
-      const syllablesRemain = 7 - this.countSyllables(currentLine);
-      // return lineTwo's display here
-      return <div><p>{"You are on Line Two. " + syllablesRemain + " syllables remain"}</p></div>
-    } else {
-      // don't return lineOne or lineThree's displays here
-      return ([]);
-    }
-    //if line one is not full then display line one syllable count 
-  } else if (!lineOneFull) {
-    if (currentLine === this.state.lineOne) {
-      const syllablesRemain = 5 - this.countSyllables(currentLine);
-
-      // return lineOne's display here
-      return <div><p>{"You are on Line One. " + syllablesRemain + " syllables remain"}</p></div>
-    } else {
-      return ([]);
-    }
-    
   }
-  
-}
+
+  //creating a function to remove the last word in the Haiku if the user wants 
+  removeLastWord = () => {
+    //copying Haiku
+    const wholeHaikuCopy = [...this.state.wholeHaiku];
+    //removing last word
+    wholeHaikuCopy.pop();
+    //set state to the Haiku without the last word 
+    this.setState({
+      wholeHaiku: wholeHaikuCopy,
+    },
+    //make sure it won't crash if the user exits back to the first word 
+    () => {
+      this.distributeSyllables();
+      if (wholeHaikuCopy.length === 0) {
+        this.setState({
+          wordOptions: [],
+        })
+        return null;
+      }
+      //calling the API to get word suggestions 
+      const newLastWord = wholeHaikuCopy[wholeHaikuCopy.length - 1].word;
+      this.getWordSuggestions(newLastWord);
+    })
+  }  
+
+  //creating a function to display the syllable count 
+  syllableDisplay (currentLine) {
+    //creating a boolean for when each line is full 
+    const lineOneFull = this.countSyllables(this.state.lineOne) === 5;
+    const lineTwoFull = this.countSyllables(this.state.lineTwo) === 7;
+    const lineThreeFull = this.countSyllables(this.state.lineThree) === 5;
+    
+    //creating conditions for displaying the syllable counts
+    if (lineOneFull && lineTwoFull && lineThreeFull) {
+      // all lines remove syllable display
+      return ([])
+      //if lines one and two are full and we're on the third line
+    } else if (lineOneFull && lineTwoFull && !lineThreeFull) {
+      if (currentLine === this.state.lineThree) {
+        // count current syllables remaining
+        const syllablesRemain = 5 - this.countSyllables(currentLine);
+        // return lineThree's display here
+        return <div><p>{"You are on Line Three. " +syllablesRemain + " syllables remain"}</p></div>
+      } else {
+        // don't return lineOne or lineTwo's displays here
+        return ([]);
+      }
+      //if line one is full and we're on line two 
+    } else if (lineOneFull && !lineTwoFull) {
+      if (currentLine === this.state.lineTwo) {
+        //count current syllables remaining 
+        const syllablesRemain = 7 - this.countSyllables(currentLine);
+        // return lineTwo's display here
+        return <div><p>{"You are on Line Two. " + syllablesRemain + " syllables remain"}</p></div>
+      } else {
+        // don't return lineOne or lineThree's displays here
+        return ([]);
+      }
+      //if line one is not full then display line one syllable count 
+    } else if (!lineOneFull) {
+      if (currentLine === this.state.lineOne) {
+        const syllablesRemain = 5 - this.countSyllables(currentLine);
+
+        // return lineOne's display here
+        return <div><p>{"You are on Line One. " + syllablesRemain + " syllables remain"}</p></div>
+      } else {
+        return ([]);
+      }
+    }
+  }
+
+  convertHaikuToString = () => {
+    // map through lines of haiku, extracting strings from 'word objects'
+    const linesAsArraysOfStrings = [
+      [...this.state.lineOne].map(elt => elt.word),
+      [...this.state.lineTwo].map(elt => elt.word),
+      [...this.state.lineThree].map(elt => elt.word)
+    ]
+
+    // join the words in each line with a space to a string.
+    // concatenate each line string with a newline char.
+    // return output.
+    return linesAsArraysOfStrings.reduce((total, currentLine) => {
+      return total = total + '\n' + currentLine.join(' ');
+    }, '')
+  }
 
   render() {
     return (
@@ -370,8 +386,6 @@ syllableDisplay (currentLine) {
         <div className="Wrapper">
           <Instructions />
           
-
-         
           <div className="Form">
            
                 <form  action="submit">
@@ -429,7 +443,7 @@ syllableDisplay (currentLine) {
                   </div>
                   
                   <div>
-                    {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button>Click to see whole poem</button> : null}
+                    {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button onClick={() => {this.setState({showFinishedHaiku: true})}}>Click to see whole poem</button> : null}
                   </div>
                   {/* <div className="wholeHaiku">
                     <h3>Whole Haiku</h3>
@@ -464,7 +478,8 @@ syllableDisplay (currentLine) {
                   })}
                 </ul>
             {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" onClick={this.removeLastWord}>Remove last item</button> : null}
-          </div>      
+          </div>    
+          {this.state.showFinishedHaiku ? <FinishedHaiku convertHaikuToString={this.convertHaikuToString}/> : null}  
         {/* WrapperBig */}
         </div>
         </div>
