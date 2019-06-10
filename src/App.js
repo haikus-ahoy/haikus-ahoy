@@ -53,6 +53,7 @@ class App extends Component {
       // a variable to store the number of syllables value from the first entry in the array
       const numSyllables = response[0].numSyllables;
       // if the user input word is less than 6 syllables
+      const regEx = /^$|\s+/
       if (seedWord === word && numSyllables < 6) {
         // a variable that holds a copy of the line one array in state
         const newWholeHaiku = [...this.state.wholeHaiku];
@@ -66,11 +67,14 @@ class App extends Component {
         },
           this.distributeSyllables);
         // if the user's word has too many syllables, prompt an error
-      } else if (seedWord === word && numSyllables > 5) {
+      } else if (seedWord === "" || seedWord === " " || seedword === regEx.test(seedWord) ) {
+        alert('Please type in a word to get started!')
+      }
+        else if (seedWord === word && numSyllables > 5) {
         alert('Please think of a word that is less than 5 syllables');
         return;
         // error handling for if the user misspells their word
-      } else if (seedWord === "" && seedWord.numSyllables === 0) {
+      } else if (!regEx.test(seedWord) ) {
         alert('Please enter a word')
       } else {
         alert(`It looks like you meant to type "${word}". Please try again.`);
