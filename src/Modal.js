@@ -1,26 +1,25 @@
 import React from 'react';
-import './Modal.css';
 
 const Modal = (props) => {
     return (
-        <div>
-            <div className="modal-wrapper"
+        <div className="instructionWrapper">
+            <div className="modalWrapper"
                 style={{
                     transform: props.show ? 'translateY(0vh)' : 'translateY(-100vh)',
-                    opacity: props.show ? '1' : '0'
+                    display: props.show ? 'inline-block' : 'none'
                 }}>
-                <div className="modal-header">
+                {/* <div className="modal-header">
                     <h3>Modal Header</h3>
                     <span className="close-modal-btn" onClick={props.close}>×</span>
-                </div>
-                <div className="modal-body">
+                </div> */}
+                <div className="modalBody">
                     <p>
                         {props.children}
                     </p>
                 </div>
-                <div className="modal-footer">
-                    <button className="btn-cancel" onClick={props.close}>Sails Away</button>
-                    {/* <button className="btn-continue">CONTINUE</button> */}
+                <div>
+                    <button className="btnCancel" onClick={props.close}>Sails Away</button>
+                    
                 </div>
             </div>
         </div>
