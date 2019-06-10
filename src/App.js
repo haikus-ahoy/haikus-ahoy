@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-<<<<<<< HEAD
 // import firebase from './firebase';
-=======
 import Swal from 'sweetalert2';
->>>>>>> d28306e1d2ea775184c494f5660cedb6b374c32d
 import Instructions from './Instructions.js';
 import FinishedHaiku from './Component/FinishedHaiku';
 import {
@@ -71,16 +68,8 @@ class App extends Component {
           seedWord: ''
         },
           this.distributeSyllables);
-<<<<<<< HEAD
         // if the user's word has too many syllables, prompt an error
-      } else if (seedWord === "" || seedWord === " " || seedWord === regEx.test(seedWord) ) {
-        alert('Please type in a word to get started!')
-      }
-=======
-      } 
-      // if the user's word has too many syllables, prompt an error
->>>>>>> d28306e1d2ea775184c494f5660cedb6b374c32d
-        else if (seedWord === word && numSyllables > 5) {
+      } else if (seedWord === word && numSyllables > 5) {
         Swal.fire({
           type: 'error',
           text: 'Please enter a word that is less than 5 syllables',
