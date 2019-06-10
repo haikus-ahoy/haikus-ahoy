@@ -32,7 +32,9 @@ class FinishedHaiku extends Component {
     render() {
         return(
             <div>
-                <p>{this.state.completedHaiku.toUpperCase()}</p>
+                <p>{this.state.completedHaiku.split('\n')
+                .reduce()
+                }</p>
                 <button onClick={this.saveHaikuToFirebase}>save haiku</button>
 
                 {/* <input type="text" onChange={this.bindInput}/> */}

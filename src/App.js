@@ -376,7 +376,7 @@ class App extends Component {
     // return output.
     return linesAsArraysOfStrings.reduce((total, currentLine) => {
       return total = total + '\n' + currentLine.join(' ');
-    }, '')
+    }, null)
   }
 
   render() {
