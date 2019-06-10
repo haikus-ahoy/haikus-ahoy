@@ -9,15 +9,15 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 html {
   font-size: 125%;
   margin: 0;
+  background: #004643;
 
 }
 body {
   display: flex;
-   background: #004643;
-   background-size: cover;
-   background-position: bottom center;
+   background-size: contain;
+   background-position:  center;
    background-repeat: no-repeat;
-   width: 100vw;
+   width: 100vh;
    
 }
 
@@ -33,7 +33,7 @@ h1, h2, h3, h4, a, button, p, ul, li {
   max-width: 80%;;
   min-width: 320px;
   margin: 0 auto;
-  border: 2px solid green;
+ 
 }
 
 /* Strip general styles */
@@ -59,13 +59,37 @@ label {
   font-family: 'Kanit', sans-serif;
   font-weight: bold;
   text-align: center;;
+ 
+}
+h2, 
+h3, 
+label {
   color: #ffffb0;
+ 
+}
+h1{
+   color: #004643;
+   text-shadow: 2px 1px #4bff72
+}
+h4{
+ font-family: 'Kanit', sans-serif;
+ font-size: 1.2rem;
+ color: #004643;
+}
+ 
+button{
+  font-family: 'Kanit', sans-serif;
+  font-weight: bold;
+  text-align: center;
+  color:#004643;
+  background: #4bff72;
+  border-radius: 15px;
+  padding: 5px 20px;
 }
 
 p {
   font-family: 'Kanit', sans-serif;
   font-weight: light;
-  text-align: left;
   color: #4bff72;
 }
 
@@ -74,14 +98,31 @@ span {
 }
 
 /* Instructions */
+.Instructions{
+  background: #ffffb0;
+  color: #004643;
+  border-bottom-right-radius: 40px;
+  border-bottom-left-radius: 40px;
+
+}
+.Instructions p{
+  /* color: #ffffb0; */
+  color: #004643;
+  text-align: justify;
+  margin-top: 10px;
+  padding: 5px 20px;
+}
 
 .buttonContainer {
-  display: flex;
-  justify-content: center;
+  display: block;
+  text-align: center;
+  margin: 30px;
+}
+.buttonContainer button{
+  margin-bottom: 20px;
 }
 .nextWordOption{
   margin: 0 auto;
-  border: 1px solid red;
 }
 
 
@@ -89,6 +130,11 @@ span {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  
+}
+.Haiku {
+  width: 80%;
+  margin:0 auto;
 }
 
 .haikuUl{
@@ -96,8 +142,8 @@ span {
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  align-content: center
+  background-color: #ffffb0;
+ 
   
 }
 .suggestedWords{
@@ -129,9 +175,43 @@ span {
   top: 30%;
   right: 0;
 }
+#removeLastItem{
+  background: #4bff72;
+  position: absolute;
+  bottom: -60%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+
 /* form */
 
-
+.Submit:disabled,
+.Submit[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+.Input {
+  width: 50%;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid #4bff72;
+  background: #ffffb0;
+}
+.Submit{
+  height: 40px;
+  margin-left: 20px;
+}
+.Form {
+  display: block;
+  text-align: center;
+  margin: 30px;
+}
+::placeholder{
+  text-align: center;
+  color: #004643;
+  font-size: 1rem;
+}
 
 @media (min-width: 700px) {
   span {

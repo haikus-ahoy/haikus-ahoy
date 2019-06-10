@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import boatBack from './boatBack.svg';
 import Instructions from './Instructions.js';
 import {
 BrowserRouter as Router,
@@ -353,23 +352,22 @@ syllableDisplay (currentLine) {
         
         <div className="Wrapper">
           <Instructions />
-          <div className="form">
-            <div className="container">
-              <div className="Wrapper">
-                <form action="submit">
+          
+
+         
+          <div className="Form">
+           
+                <form  action="submit">
                   <label htmlFor="word" className="visuallyHidden">Input Starting Word Here</label>
-                  <input onChange={this.handleChange} placeholder="Enter your Starting Word" value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/>
-                  <button disabled={this.state.wholeHaiku.length > 0 ? true : false } onClick={this.handleClick}>Submit</button>
+                  <input className="Input" onChange={this.handleChange} placeholder="Enter your Starting Word" value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/>
+                  <button disabled={this.state.wholeHaiku.length > 0 ? true : false } onClick={this.handleClick} className="Submit">Submit</button>
                 </form>
-                {/* wrapperSmall */}
-              </div>
-              {/* container */}
-            </div>
+
             {/* form */}
           </div>
 
-        
-          <div className="haiku">
+          <div className="Container">
+          <div className="Haiku">
           
 
                 <h2>Haiku</h2>
@@ -380,7 +378,7 @@ syllableDisplay (currentLine) {
                     
                     <ul className="haikuUl">
                       {this.state.lineOne.map((result, i) => {
-                        return (<li key={i}>{result.word}</li>)
+                        return (<li key={i}><h4>{result.word}</h4></li>)
                       })}
                     </ul>
                     {
@@ -392,7 +390,7 @@ syllableDisplay (currentLine) {
                     
                 <ul className="haikuUl">
                       {this.state.lineTwo.map((result, i) => {
-                      return (<li key={i}>{result.word}</li>)
+                        return (<li key={i}><h4>{result.word}</h4></li>)
                       }
                       )}
                     </ul>
@@ -404,7 +402,7 @@ syllableDisplay (currentLine) {
                     
                 <ul className="haikuUl">
                       {this.state.lineThree.map((result, i) => {
-                        return (<li key={i}>{result.word}</li>)
+                        return (<li key={i}><h4>{result.word}</h4></li>)
                       }
                       )}
                     </ul>
@@ -412,7 +410,7 @@ syllableDisplay (currentLine) {
                       this.syllableDisplay(this.state.lineThree)
                     }
                   </div>
-                  {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" onClick={this.removeLastWord}>Remove last item</button> : null}
+                  
                   <div>
                     {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button>Click to see whole poem</button> : null}
                   </div>
@@ -448,11 +446,11 @@ syllableDisplay (currentLine) {
                     )
                   })}
                 </ul>
-           
+            {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" onClick={this.removeLastWord}>Remove last item</button> : null}
           </div>      
         {/* WrapperBig */}
         </div>
-        <img src={boatBack} className="Boat" alt="Boat" />
+        </div>
       </Router>
     );
   }
