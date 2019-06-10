@@ -5,6 +5,7 @@ import Modal from './Modal.js';
 import Swal from 'sweetalert2';
 import Instructions from './Instructions.js';
 import FinishedHaiku from './Component/FinishedHaiku';
+// import FinalPrint from './FInalPrint.js'
 import './App.css';
 
 class App extends Component {
@@ -211,6 +212,12 @@ class App extends Component {
     e.preventDefault();
     // calls the getUserInput function, which calls the API
     this.getUserWord();
+    //smooth scroll
+    const element = document.getElementById('ContainerHaiku');
+    element.scrollIntoView({
+      block: 'end',
+      behavior: 'smooth',
+    });
   }
 
   // keeps track of the user's keystrokes in the input field
@@ -417,7 +424,7 @@ class App extends Component {
             </Modal>
           </div>
          
-            <div className="Form">
+            <div className="Form" id="formContainer">
             
                   <form  action="submit">
                     <label htmlFor="word" className="visuallyHidden">Input Starting Word Here</label>
@@ -430,8 +437,8 @@ class App extends Component {
             </div>
           </header>  
         
-          <div className="Container">
-            <div className="Haiku">
+          <div className="ContainerHaiku" id="ContainerHaiku">
+          <div className="Haiku" id="dynamicHaiku">
             
             {this.state.wholeHaiku.length > 0 ? <h2 onClick={this.removeLastWord}>Haiku</h2> : null}
                   <div className="flexParent">
@@ -506,11 +513,7 @@ class App extends Component {
             {/* haiku */}
             </div>   
          
-          <div className="nextWordOption">
-            
-            
-                
-               
+          <div className="nextWordOption"> 
             <ul className="suggestedWords">
               {/* //mapping over the wordOptions array and displaying to the page  */}
               {this.state.wordOptions.map((result, i) => {
@@ -522,12 +525,12 @@ class App extends Component {
                 )
               })}
             </ul>
-            {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" disabled={this.state.showFinishedHaiku} onClick={this.removeLastWord}>Remove last item</button> : null}
+            {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" disabled={this.state.showFinishedHaiku} onClick={this.removeLastWord}>Remove last word</button> : null}
           </div>    
             {this.state.showFinishedHaiku ? <FinishedHaiku renderedHaiku={this.renderHaiku()} convertHaikuToString={this.convertHaikuToString}/> : null}  
         {/* WrapperBig */}
         </div>
-        </div>
+      </div>
  
     );
   }
