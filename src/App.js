@@ -350,6 +350,24 @@ class App extends Component {
     }
   }
 
+  handleClickWholePoem = () => {
+    // map through lines of haiku, extracting strings from 'word objects'
+    const linesAsArraysOfStrings = [
+      [...this.state.lineOne].map(elt => elt.word),
+      [...this.state.lineTwo].map(elt => elt.word),
+      [...this.state.lineThree].map(elt => elt.word)
+    ]
+
+    // join the words in each line with a space to a string.
+    // concatenate each line string with a newline char.
+    // return output.
+    return linesAsArraysOfStrings.reduce((total, currentLine) => {
+      return total = total + '\n' + currentLine.join(' ');
+    }, '')
+    
+    
+  }
+
   render() {
     return (
       <Router>
@@ -414,7 +432,7 @@ class App extends Component {
                   </div>
                   
                   <div>
-                    {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button>Click to see whole poem</button> : null}
+                    {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button onClick={this.handleClickWholePoem}>Click to see whole poem</button> : null}
                   </div>
                   {/* <div className="wholeHaiku">
                     <h3>Whole Haiku</h3>
