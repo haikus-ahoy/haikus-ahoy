@@ -384,8 +384,21 @@ class App extends Component {
     // concatenate each line string with a newline char.
     // return output.
     return linesAsArraysOfStrings.reduce((total, currentLine) => {
-      return total = total + '\n' + currentLine.join(' ');
+      const joinedLine = currentLine.join(' ');
+      return total === null ? joinedLine : total + '\n' + joinedLine;
     }, null)
+  }
+
+  renderHaiku = () => {
+    const rendered = [
+      [...this.state.lineOne.map(elt => elt.word)].join(' '),
+      <br />,
+      [...this.state.lineTwo.map(elt => elt.word)].join(' '),
+      <br />,
+       [...this.state.lineThree.map(elt => elt.word)].join(' ')
+    ];
+    console.log(rendered)
+    return rendered
   }
 
   render() {
@@ -514,7 +527,7 @@ class App extends Component {
                 </ul>
             {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" onClick={this.removeLastWord}>Remove last item</button> : null}
           </div>    
-          {this.state.showFinishedHaiku ? <FinishedHaiku convertHaikuToString={this.convertHaikuToString}/> : null}  
+            {this.state.showFinishedHaiku ? <FinishedHaiku renderedHaiku={this.renderHaiku()} convertHaikuToString={this.convertHaikuToString}/> : null}  
         {/* WrapperBig */}
         </div>
         </div>

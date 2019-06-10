@@ -15,12 +15,13 @@ class FinishedHaiku extends Component {
         this.setState({
             completedHaiku: haikuString,
         })
+        console.log(this.props.renderedHaiku);
     }
 
     // function to save the completed haiku to Firebase
     saveHaikuToFirebase = () => {
         const dbRef = firebase.database().ref('/userHaikus');
-        dbRef.push(this.state.completedHaiku);
+        dbRef.push(this.props.convertHaikuToString());
     }
 
     // bindInput = (event) => {
@@ -32,7 +33,7 @@ class FinishedHaiku extends Component {
     render() {
         return(
             <div>
-                <p>{this.state.completedHaiku}</p>
+                <p>{this.props.renderedHaiku}</p>
                 <button onClick={this.saveHaikuToFirebase}>save haiku</button>
 
                 {/* <input type="text" onChange={this.bindInput}/> */}
