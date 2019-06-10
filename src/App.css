@@ -129,9 +129,7 @@ span {
 }
 
 /* Header styles */
-header {
-  height: 100vh;
-}
+
 
 form {
   display: flex;
@@ -269,6 +267,10 @@ button[disabled]{
     margin-bottom: 20px;
 }
 
+.ContainerHaiku {
+  height: 100vh;
+}
+
 
 @media (max-width: 1000px) {
   p {
@@ -302,5 +304,9 @@ button[disabled]{
 
   .Input {
     width: 100%;
+  }
+
+  button {
+    font-size: 1rem;
   }
 }

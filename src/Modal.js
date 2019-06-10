@@ -10,9 +10,9 @@ const Modal = (props) => {
                 }}>
                
                 <div className="modalBody">
-                    <p>
+                    <div>
                         {props.children}
-                    </p>
+                    </div>
                 </div>
                 <div>
                     <button className="btnCancel" onClick={props.close}>Sails Away</button>
