@@ -8,10 +8,7 @@ const Modal = (props) => {
                     transform: props.show ? 'translateY(0vh)' : 'translateY(-100vh)',
                     display: props.show ? 'inline-block' : 'none'
                 }}>
-                {/* <div className="modal-header">
-                    <h3>Modal Header</h3>
-                    <span className="close-modal-btn" onClick={props.close}>×</span>
-                </div> */}
+               
                 <div className="modalBody">
                     <p>
                         {props.children}

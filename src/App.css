@@ -92,20 +92,14 @@ span {
   display: none;
 }
 
-/* Instructions */
-.Instructions{
-  background: #ffffb0;
-  color: #004643;
-  border-bottom-right-radius: 40px;
-  border-bottom-left-radius: 40px;
 
-}
+
 .Instructions p{
-  /* color: #ffffb0; */
-  color: #004643;
+  color: #ffffb0;
   text-align: justify;
   margin-top: 10px;
   padding: 5px 20px;
+  text-align: center;
 }
 
 .buttonContainer {
@@ -212,6 +206,7 @@ button[disabled]{
 /* Modal */
 .Modal {
   position: absolute;
+  
   z-index: 10;
   top: 50%;
   left: 50%;
@@ -219,10 +214,14 @@ button[disabled]{
  
 }
 .modalWrapper {
-    background: #004643;
+  background: url('./modal.svg');
+  background-position: center;
+  background-size: cover;
+  
     border-radius: 20px; 
     transition: all .8s;
     height: 100vh;
+    width: 100vw;
    
 }
 .instructionWrapper{
