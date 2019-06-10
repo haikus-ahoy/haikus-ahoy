@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Modal from './Modal.js';
 // import firebase from './firebase';
 import Swal from 'sweetalert2';
 import Instructions from './Instructions.js';
@@ -27,6 +28,7 @@ class App extends Component {
       lineTwoSyllables: 0,
       lineThreeSyllables: 0,
       syllableFilter: 4,
+      isShowing: false,
       showFinishedHaiku: false,
     }
     
@@ -34,8 +36,15 @@ class App extends Component {
   //calling the function of the axios call for all the ship words that we pull three at a time from 
   componentDidMount(){
     this.getShipWords();
+    this.setState ({
+      isShowing:true,
+    })
   }
-  
+  closeModalHandler = () => {
+    this.setState({
+      isShowing: false
+    });
+  }
   // function to get the user input, which makes the API call to the Datamuse API
   getUserWord = () => {
     const seedWord = this.state.seedWord.toLowerCase();
@@ -382,60 +391,74 @@ class App extends Component {
   render() {
     return (
       <Router>
-        
+  
+
         <div className="Wrapper">
-          <Instructions />
-          
-          <div className="Form">
-           
-                <form  action="submit">
-                  <label htmlFor="word" className="visuallyHidden">Input Starting Word Here</label>
-                  <input className="Input" onChange={this.handleChange} placeholder="Enter your Starting Word" value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/>
-                  <button disabled={this.state.wholeHaiku.length > 0 ? true : false } onClick={this.handleClick} className="Submit">Submit</button>
-                </form>
+         <header>
 
-            {/* form */}
+          <div className="Modal">
+            <Modal
+              className="modal"
+              show={this.state.isShowing}
+              close={this.closeModalHandler}>
+              <Instructions />
+            </Modal>
           </div>
+         
+            <div className="Form">
+            
+                  <form  action="submit">
+                    <label htmlFor="word" className="visuallyHidden">Input Starting Word Here</label>
+                    <input className="Input" onChange={this.handleChange} placeholder="Enter your Starting Word" value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/>
+                    <button disabled={this.state.wholeHaiku.length > 0 ? true : false } onClick={this.handleClick} className="Submit">Submit</button>
+                  </form>
 
-          <div className="Container">
-          <div className="Haiku">
-          
-
-                <h2>Haiku</h2>
-                {/* {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" onClick={this.removeLastWord}>Remove last item</button> : null} */}
-                <div className="flexParent">
+              {/* form */}
               
-                  <div className="lines">
-                    
-                    <ul className="haikuUl">
-                      {this.state.lineOne.map((result, i) => {
-                        return (<li key={i}><h4>{result.word}</h4></li>)
-                      })}
-                    </ul>
-                    {
-                      this.syllableDisplay(this.state.lineOne)
-                    }
-                    {/* lines */}
-                  </div>
-                  <div className="lines">
-                    
-                <ul className="haikuUl">
-                      {this.state.lineTwo.map((result, i) => {
-                        return (<li key={i}><h4>{result.word}</h4></li>)
+            </div>
+          </header>  
+        
+          <div className="Container">
+            <div className="Haiku">
+            
+
+                  <h2>Haiku</h2>
+                  {/* {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" onClick={this.removeLastWord}>Remove last item</button> : null} */}
+                  <div className="flexParent">
+                
+                    <div className="lines">
+                      
+                      <ul className="haikuUl">
+                        {this.state.lineOne.map((result, i) => {
+                          return (<li key={i}><h4>{result.word}</h4></li>)
+                        })}
+                      </ul>
+                      {
+                        this.syllableDisplay(this.state.lineOne)
                       }
-                      )}
-                    </ul>
-                    {
-                      this.syllableDisplay(this.state.lineTwo)
-                    }
-                  </div>
-                  <div className="lines">
-                    
-                <ul className="haikuUl">
-                      {this.state.lineThree.map((result, i) => {
-                        return (<li key={i}><h4>{result.word}</h4></li>)
+                      {/* lines */}
+                    </div>
+                    <div className="lines">
+                      
+                  <ul className="haikuUl">
+                        {this.state.lineTwo.map((result, i) => {
+                          return (<li key={i}><h4>{result.word}</h4></li>)
+                        }
+                        )}
+                      </ul>
+                      {
+                        this.syllableDisplay(this.state.lineTwo)
                       }
-                      )}
+
+                    </div>
+                    <div className="lines">
+                      
+                  <ul className="haikuUl">
+                        {this.state.lineThree.map((result, i) => {
+                          return (<li key={i}><h4>{result.word}</h4></li>)
+                        }
+                        )}
+                     
                     </ul>
                     {
                       this.syllableDisplay(this.state.lineThree)
@@ -450,16 +473,28 @@ class App extends Component {
                     <ul>
                       {this.state.wholeHaiku.map((result, i) => {
                         return (<li key={i}>{result.word}</li>)
+
                       }
-                      )}
-                    </ul>
+                    </div>
                     
-                  </div> */}
-                    {/* {this.countSyllables(this.state.wholeHaiku) === 17 ? console.log("true") : console.log("false") } */}
-                </div>
-            
-          {/* haiku */}
-          </div>   
+                    <div>
+                      {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button>Click to see whole poem</button> : null}
+                    </div>
+                    {/* <div className="wholeHaiku">
+                      <h3>Whole Haiku</h3>
+                      <ul>
+                        {this.state.wholeHaiku.map((result, i) => {
+                          return (<li key={i}>{result.word}</li>)
+                        }
+                        )}
+                      </ul>
+                      
+                    </div> */}
+                      {/* {this.countSyllables(this.state.wholeHaiku) === 17 ? console.log("true") : console.log("false") } */}
+                  </div>
+              
+            {/* haiku */}
+            </div>   
          
           <div className="nextWordOption">
             
