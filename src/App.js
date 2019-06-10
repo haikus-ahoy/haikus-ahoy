@@ -485,30 +485,7 @@ class App extends Component {
                   <div>
                     {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button onClick={() => {this.setState({showFinishedHaiku: true})}}>Click to see whole poem</button> : null}
                   </div>
-                  {/* <div className="wholeHaiku">
-                    <h3>Whole Haiku</h3>
-                    <ul>
-                      {this.state.wholeHaiku.map((result, i) => {
-                        return (<li key={i}>{result.word}</li>)
-
-                      }
-                    </div>
-                    
-                    <div>
-                      {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button>Click to see whole poem</button> : null}
-                    </div>
-                    {/* <div className="wholeHaiku">
-                      <h3>Whole Haiku</h3>
-                      <ul>
-                        {this.state.wholeHaiku.map((result, i) => {
-                          return (<li key={i}>{result.word}</li>)
-                        }
-                        )}
-                      </ul>
-                      
-                    </div> */}
-                      {/* {this.countSyllables(this.state.wholeHaiku) === 17 ? console.log("true") : console.log("false") } */}
-                  </div>
+                </div>
               
             {/* haiku */}
             </div>   
