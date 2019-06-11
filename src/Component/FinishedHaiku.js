@@ -44,17 +44,17 @@ class FinishedHaiku extends Component {
     saveHaikuToFirebase = () => {
         const dbRef = firebase.database().ref('/userHaikus');
         dbRef.push(this.props.convertHaikuToString());
-        this.setState({
-            saveConfirmedMessage: "Thank you for sharing your haiku!",
-        })
+        // this.setState({
+        //     saveConfirmedMessage: "Thank you for sharing your haiku!",
+        // })
     }
 
     render() {
         return(
             <div>
                 <p>{this.props.renderedHaiku}</p>
-                <button disabled={this.state.saveConfirmedMessage? true: false} onClick={this.saveHaikuToFirebase}>save haiku</button>
-                <p>{this.state.saveConfirmedMessage}</p>
+                {/* <button disabled={this.state.saveConfirmedMessage? true: false} onClick={this.saveHaikuToFirebase}>save haiku</button>
+                <p>{this.state.saveConfirmedMessage}</p> */}
             </div>
         )
     }
