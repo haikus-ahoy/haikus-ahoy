@@ -157,7 +157,7 @@ class App extends Component {
         return element !== undefined;
       });
       //grabbing threeBoatWords from below, and concatonating them to the filteredWordOptions to display for the user to pick from 
-      const threeBoatWords = this.grabThree();
+      this.grabThree();
       const fullWordOptionsArray = filteredWordOptions.concat(this.state.currentThreeBoatWords);
       //setting state of wordOptions to fullWordOptionsArray
       this.setState({
