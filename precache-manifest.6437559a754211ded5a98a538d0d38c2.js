@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a5b60f3c3cbd209be5bfd8599e88d1a1",
+    "revision": "b0e9efff0e4e7b1de966ee96b201cb49",
     "url": "/haikus-ahoy/index.html"
   },
   {
-    "revision": "cc9e425565301e5103b8",
+    "revision": "d00c84fad4034286ca68",
     "url": "/haikus-ahoy/static/css/main.34bedd8c.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/haikus-ahoy/static/js/2.f1e06f02.chunk.js"
   },
   {
-    "revision": "cc9e425565301e5103b8",
-    "url": "/haikus-ahoy/static/js/main.691cd784.chunk.js"
+    "revision": "d00c84fad4034286ca68",
+    "url": "/haikus-ahoy/static/js/main.df0e437a.chunk.js"
   },
   {
     "revision": "f3b7d9ab14e3f29fdd16",
