@@ -88,23 +88,31 @@ button{
   padding: 5px 20px;
   font-size: 1.4rem;
   border: none;
-  transition: color 0.3s, transform 0.3s;
+  transition: color 0.3s, transform 0.3s, background 0.3s;
 }
 
-button:hover.btnCanel 
- {
+ .btnCancel:hover,
+ .Submit:hover,
+ .removeLastItem:hover,
+ .btnContinue:hover {
   background: #8cffa5;
-}
+  }
 
-.btnCanel.button:active {
+.btnCancel:active,
+.Submit:active,
+.removeLastItem:active,
+.btnContinue:active {
   transform: scale(0.9);
 }
 
-button:focus {
+button:focus {  
   outline: 0;
 }
 
-.btnCanel.button:focus {
+.btnCancel:focus,
+.Submit:focus,
+.removeLastItem:focus,
+.btnContinue:focus {
   transform: scale(1.2);
 }
 
@@ -129,7 +137,7 @@ a {
 .Instructions {
   width: 70%;
   margin: 0 auto;
-  padding-top: 50px;
+  padding-top: 20px;
   position: relative;
 }
 
@@ -230,6 +238,16 @@ form input:active {
 }
 .wordButton:hover{
   font-weight: bold;
+  color: #4bff72;
+}
+
+.wordButton:active {
+  background: #4bff72;
+  color: #ffffb0;
+}
+
+.wordButton:focus {
+  transform: scale(0.9);
 }
 .nextWordOption{
  position: relative;
@@ -357,20 +375,22 @@ button.btnCancel {
 @media (max-width: 475px) {
   .Instructions {
     padding-top: 0;
+    width: 100%;
   }
   .Instructions p {
     padding: 0;
   }
+
   p {
     font-size: 1rem;
   }
-
-  .Instructions {
-    width: 90%;
+  form {
+    flex-direction: column;
   }
 
   .Input {
-    width: 100%;
+    width: 80%;
+    margin-bottom: 40px;
   }
 
   button {
