@@ -1,6 +1,5 @@
 import React from 'react';
 import './Haiku.css';
-import FinishedHaiku from './FinishedHaiku';
 
 const Haiku = (props) => {
     return (
@@ -20,7 +19,7 @@ const Haiku = (props) => {
                     </div>
                     <div className="haikuFooter">
                         <button className="btnContinue" onClick={props.refresh}>Start Over</button>
-                        <FinishedHaiku convertHaikuToString={props.convertHaikuToString}/>
+                        {/* <FinishedHaiku convertHaikuToString={props.convertHaikuToString}/> */}
                     </div>
                 </div>
             </div>
