@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Modal from './Modal.js';
+import Modal from './Component/Modal.js';
 import Haiku from './Component/Haiku.js';
 import Swal from 'sweetalert2';
-import Instructions from './Instructions.js';
+import Instructions from './Component/Instructions.js';
 import './App.css';
 
 class App extends Component {
@@ -16,7 +16,7 @@ class App extends Component {
       lineOne:[],
       lineTwo:[],
       lineThree:[],
-      //state for whoel haiku
+      //state for whole haiku
       wholeHaiku: [],
       //state for user word
       getUserWord: [],
@@ -515,8 +515,7 @@ class App extends Component {
                 className="poem"
                 show={this.state.showPoem}
                 cancel={this.closePoem}
-                refresh={this.refreshPage}
-                convertHaikuToString={this.convertHaikuToString}>
+                refresh={this.refreshPage}>
                     <p>{this.renderHaiku()}</p>
               </Haiku>
             </div>
@@ -536,7 +535,7 @@ class App extends Component {
               )
             })}
           </ul>
-          {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" className="removeLastItem" disabled={this.state.showFinishedHaiku} onClick={this.removeLastWord}>Remove last word</button> : null}
+          {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" className="removeLastItem" disabled={this.state.showFinishedHaiku} onClick={this.removeLastWord}>Remove Last Word</button> : null}
         </div>    
       </div>
       )}  
