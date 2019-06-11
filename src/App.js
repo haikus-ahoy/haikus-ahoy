@@ -8,6 +8,7 @@ import Instructions from './Instructions.js';
 import FinishedHaiku from './Component/FinishedHaiku';
 // import FinalPrint from './FInalPrint.js'
 import './App.css';
+import { tsImportEqualsDeclaration } from '@babel/types';
 
 class App extends Component {
   constructor() {  
@@ -455,20 +456,22 @@ class App extends Component {
         <header>
             <div className="Form" id="formContainer">
             
-              <form action="submit">
-                <label htmlFor="word" className="visuallyHidden">Input Starting Word Here</label>
-                <input className="Input" onChange={this.handleChange} placeholder="Enter your Starting Word" value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/>
-                <button disabled={this.state.wholeHaiku.length > 0 ? true : false} onKeyDown={this.handleKeyDown} onClick={this.handleClick} className="Submit"><a href="#ContainerHaiku">Submit</a></button>
-              </form>
-
-      
+                  <form  action="submit">
+                    <label htmlFor="word" className="visuallyHidden">Input Starting Word Here</label>
+                    <input className="Input" onChange={this.handleChange} placeholder="Enter your Starting Word" value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/> 
+                    <button disabled={this.state.wholeHaiku.length > 0 ? true : false } onClick={this.handleClick} className="Submit"><a href="#ContainerHaiku">Submit</a></button>
+                  </form>
             {/* form */}
             
           </div>
           
        </header>  
-        
+
       <div className="ContainerHaiku" id="ContainerHaiku">
+      {this.state.wholeHaiku.length > 0 && (
+        <div>
+
+       
           <div className="Haiku" id="dynamicHaiku">
             
             {this.state.wholeHaiku.length > 0 ? <h2 onClick={this.removeLastWord}>Haiku</h2> : null}
@@ -548,6 +551,8 @@ class App extends Component {
           </div>    
             {this.state.showFinishedHaiku ? <FinishedHaiku renderedHaiku={this.renderHaiku()} convertHaikuToString={this.convertHaikuToString}/> : null}  
         {/* WrapperBig */}
+            </div>
+      )}  
       </div>
     </div>
  
