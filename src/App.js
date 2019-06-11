@@ -427,15 +427,14 @@ class App extends Component {
   }
 
   renderHaiku = () => {
-    const rendered = [
+   return [
       [...this.state.lineOne.map(elt => elt.word)].join(' '),
       <br />,
       [...this.state.lineTwo.map(elt => elt.word)].join(' '),
       <br />,
        [...this.state.lineThree.map(elt => elt.word)].join(' ')
     ];
-    console.log(rendered)
-    return rendered
+    
   }
 
   render() {
@@ -524,7 +523,7 @@ class App extends Component {
                   show={this.state.showPoem}
                   cancel={this.closePoem}
                   refresh={this.refreshPage}>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A ad cupiditate, laudantium dolores labore consectetur consequuntur exercitationem sequi quod iusto voluptatem consequatur reiciendis incidunt dolorum quaerat! Sunt dolore quas sequi!</p>
+                      <p>{this.renderHaiku()}</p>
                   
                   {/* {this.countSyllables(this.state.wholeHaiku) >= 17 ? <div>{() => { this.setState({ showFinishedHaiku: true }) }}></div> : null} */}
 
