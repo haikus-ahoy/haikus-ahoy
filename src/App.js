@@ -440,7 +440,7 @@ class App extends Component {
     return (
 
 
-     <div className="Wrapper">
+     <div className="wrapper">
        
 
           <div className="Modal">
@@ -551,7 +551,7 @@ class App extends Component {
             {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" className="removeLastItem" disabled={this.state.showFinishedHaiku} onClick={this.removeLastWord}>Remove last word</button> : null}
           </div>    
             
-        {/* WrapperBig */}
+        {/* wrapperBig */}
             </div>
       )}  
       </div>

@@ -27,7 +27,7 @@ h1, h2, h3, h4, a, button, p, ul, li {
   width: 100%;
 }
 
-.Wrapper{
+.wrapper{
   max-width: 1440px;
   width: 80%;
   margin: 0 auto;
@@ -382,7 +382,11 @@ button[disabled]{
   }
 }
 
-@media (max-width: 475px) {
+@media (max-width: 500px) {
+  .wrapper {
+    width: 95%;
+  }
+
   .Instructions {
     padding-top: 0;
     width: 100%;
@@ -407,5 +411,19 @@ button[disabled]{
 
   button {
     font-size: 1rem;
+  }
+
+  .Haiku {
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .suggestedWords {
+    justify-content: center;
+  }
+
+  .wordButton {
+    min-width: 200px;
   }
 }
