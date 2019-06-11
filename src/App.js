@@ -32,7 +32,7 @@ class App extends Component {
     }
     
     //create ref object 
-    this.myRef = React.createRef();
+    this.containerElement = null;
   }
 
 
@@ -43,6 +43,20 @@ class App extends Component {
       isShowing:true,
     })
   }
+  //create
+  setContainerRef = (element) => {
+  this.containerElement = element;
+}
+//make a scroll function
+  scrollToMyRef = () => {
+    console.log(this.containerElement, "container element")
+  // if (this.containerElement) {
+  //   // console.log('scrollToMyRef', this.myRef.current.scrollTop, this.containerElement.current.scrollHeight)
+  //   window.scrollTo(0, this.containerElement.current.offsetTop)
+  // }
+};
+
+
   closeModalHandler = () => {
     this.setState({
       isShowing: false
@@ -237,12 +251,6 @@ class App extends Component {
     this.scrollToMyRef();
   }
 
-  //make a scroll function
-  scrollToMyRef = () => {
-    console.log('scrollToMyRef', this.myRef.current.scrollTop, this.myRef.current.scrollHeight)
-    window.scrollTo(0, 1000)
-  };
-
   handleKeyDown = (e) => {
     // e.preventDefault();
     console.log('enter')
@@ -266,6 +274,7 @@ class App extends Component {
   buttonWordChoice = (event, index) => {
     //event prevent default
     event.preventDefault();
+    console.log(this.myRef())
     //saving line one in a copy
     const wholeHaiku = [...this.state.wholeHaiku]
     //creating a variable for the new word
@@ -470,7 +479,7 @@ class App extends Component {
           </div>
        </header>  
 
-      <div className="ContainerHaiku" id="ContainerHaiku" ref={this.myRef}>
+      <div className="ContainerHaiku" id="ContainerHaiku" ref={this.setContainerRef}>
       {this.state.wholeHaiku.length > 0 && (
         <div>
 
