@@ -31,7 +31,11 @@ class App extends Component {
       showPoem: false,
     }
     
+    //create ref object 
+    this.myRef = React.createRef();
   }
+
+
   //calling the function of the axios call for all the ship words that we pull three at a time from 
   componentDidMount(){
     this.getShipWords();
@@ -224,20 +228,21 @@ class App extends Component {
   }
 
   // click event for our button
-  handleClick = (e) => {
+  handleSubmit = (e) => {
     // prevents default action
     e.preventDefault();
     // calls the getUserInput function, which calls the API
     this.getUserWord();
-    //smooth scroll
-    // const element = document.getElementById('ContainerHaiku');
-    // element.scrollIntoView({
-    //   block: 'end',
-    //   behavior: 'smooth',
-    // });
+    // run this method to execute scrolling.
+    this.scrollToMyRef();
   }
 
-  
+  //make a scroll function
+  scrollToMyRef = () => {
+    console.log('scrollToMyRef', this.myRef.current.scrollTop, this.myRef.current.scrollHeight)
+    window.scrollTo(0, 1000)
+  };
+
 
   // keeps track of the user's keystrokes in the input field
   handleChange = (event) => {
@@ -426,6 +431,8 @@ class App extends Component {
     
   }
 
+   
+
   render() {
     return (
 
@@ -444,25 +451,23 @@ class App extends Component {
         <header>
             <div className="Form" id="formContainer">
             
-                  <form  action="submit">
-                    <label htmlFor="word" className="visuallyHidden">Input Starting Word Here</label>
-                    <input className="Input" onChange={this.handleChange} placeholder="Enter your Starting Word" value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/> 
-                    <button disabled={this.state.wholeHaiku.length > 0 ? true : false } onClick={this.handleClick} className="Submit"><a href="#ContainerHaiku">Submit</a></button>
+            <form action="submit" onSubmit={this.handleSubmit}>
+                  <label htmlFor="word" className="visuallyHidden">Input Starting Word Here</label>
+                  <input className="Input" onChange={this.handleChange} placeholder="Enter your Starting Word" value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/> 
+                  <button disabled={this.state.wholeHaiku.length > 0 ? true : false} className="Submit">Submit</button>
                   </form>
             {/* form */}
-            
           </div>
-          
        </header>  
 
-      <div className="ContainerHaiku" id="ContainerHaiku">
+      <div className="ContainerHaiku" id="ContainerHaiku" ref={this.myRef}>
       {this.state.wholeHaiku.length > 0 && (
         <div>
 
        
           <div className="Haiku" id="dynamicHaiku">
             
-            {this.state.wholeHaiku.length > 0 ? <h2 onClick={this.removeLastWord}>Haiku</h2> : null}
+            {this.state.wholeHaiku.length > 0 ? <h2 onSubmit={this.removeLastWord}>Haiku</h2> : null}
             <div className="flexParent">
                 
                     <div className="lines">
@@ -541,8 +546,8 @@ class App extends Component {
             {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" className="removeLastItem" disabled={this.state.showFinishedHaiku} onClick={this.removeLastWord}>Remove last word</button> : null}
           </div>    
             
-        {/* WrapperBig */}
-            </div>
+          {/* WrapperBig */}
+        </div>
       )}  
       </div>
     </div>
