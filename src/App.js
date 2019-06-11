@@ -243,6 +243,16 @@ class App extends Component {
     window.scrollTo(0, 1000)
   };
 
+  handleKeyDown = (e) => {
+    // e.preventDefault();
+    console.log('enter')
+    //smooth scroll
+    const element = document.getElementById('ContainerHaiku');
+    element.scrollIntoView({
+      block: 'end',
+      behavior: 'smooth',
+    });
+  }
 
   // keeps track of the user's keystrokes in the input field
   handleChange = (event) => {
@@ -453,7 +463,7 @@ class App extends Component {
             
             <form action="submit" onSubmit={this.handleSubmit}>
                   <label htmlFor="word" className="visuallyHidden">Input Starting Word Here</label>
-                  <input className="Input" onChange={this.handleChange} placeholder="Enter your Starting Word" value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/> 
+                  <input className="Input" onChange={this.handleChange} placeholder="Enter Your Starting Word" value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/> 
                   <button disabled={this.state.wholeHaiku.length > 0 ? true : false} className="Submit">Submit</button>
                   </form>
             {/* form */}

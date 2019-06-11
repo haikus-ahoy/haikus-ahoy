@@ -10,17 +10,15 @@ html {
   font-size: 125%;
   margin: 0;
   background: #004643;
-
 }
+
 body {
   display: flex;
-   
 }
 
 h1, h2, h3, h4, a, button, p, ul, li {
   margin: 0;
   padding: 0;
-
 }
 
 /* This was giving a hard width so that's why we had to target it with an id */
@@ -34,11 +32,9 @@ h1, h2, h3, h4, a, button, p, ul, li {
   width: 80%;
   margin: 0 auto;
   min-width: 320px;
- 
 }
 
-/* Strip general styles */
-
+/* STRIP GENERAL STYLES */
 
 li {
   list-style: none;
@@ -50,7 +46,7 @@ a {
   color: inherit;
 }
 
-/* Font styles */
+/* FONT STYLES */
 
 h1, 
 h2, 
@@ -91,8 +87,6 @@ button{
   border: none;
   transition: color 0.3s, transform 0.3s, background 0.3s;
 }
-
-
 
  .btnCancel:hover,
  .Submit:hover,
@@ -135,7 +129,7 @@ a {
   color: inherit;
 }
 
-/* Instructions styles */
+/* INSTRUCTION STYLES */
 
 .Instructions {
   width: 70%;
@@ -152,12 +146,11 @@ a {
   text-align: center;
 }
 
-
 .nextWordOption{
   margin: 0 auto;
 }
 
-/* Header styles */
+/* HEADER STYLES */
 
 header {
   height: 90vh;
@@ -193,8 +186,7 @@ form input:active {
   background: #8cffa5;
 }
 
-/* Haiku Styles */
-
+/* HAIKU STYLES */
 
 .flexParent {
   display: flex;
@@ -221,7 +213,7 @@ form input:active {
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-content: center;
 }
 
@@ -232,8 +224,9 @@ form input:active {
   color:#ffffb0;
   border-radius: 10px;
   text-align: center;
-
+  min-width: 150px;
 }
+
 .wordButton:hover{
   font-weight: bold;
   color: #4bff72;
@@ -248,8 +241,9 @@ form input:active {
   transform: scale(0.9);
 }
 
-.nextWordOption{
+.nextWordOption {
  position: relative;
+ width: 90%;
 }
 
 .Boat {
@@ -257,12 +251,13 @@ form input:active {
   top: 30%;
   right: 0;
 }
+
 .removeLastItem{
  margin: 20px 0;
  display: block;
  margin: 30px auto;
-
 }
+
 .removeLastItem button {
   width: 30%;
   background: #4bff72;
@@ -271,10 +266,9 @@ form input:active {
 .seePoem {
   display: block;
   margin: 30px auto;
-  
 }
 
-/* form */
+/* FORM STYLES */
 
 button:disabled,
 button[disabled]{
@@ -313,7 +307,8 @@ button[disabled]:hover {
   opacity: 1;
 }
 
-/* Modal */
+/* MODAL STYLES */
+
 .Modal {
   position: absolute;
   z-index: 10;
@@ -337,23 +332,26 @@ button[disabled]:hover {
   background-position: center;
   background-size:cover;
   height: 100vh;
-
 }
+
 .buttonContainer {
   display: flex;
   justify-content: center;
 }
+
 .btnCancel {
   background-color:  #4bff72;
   color: #004643;
   display: block;
   margin: 20px auto 0;
 }
+
 .ContainerHaiku {
   position: relative;
 }
 
-/* SWAL styling */
+/* SWEETALERT STYLES */
+
 .swal2-popup {
   background: #ffffb0;
 }
@@ -366,6 +364,8 @@ button[disabled]:hover {
   background: #4bff72;
   color: #004643;
 }
+
+/* MEDIA QUERIES */
 
 @media (max-width: 1000px) {
   p {
@@ -392,6 +392,7 @@ button[disabled]:hover {
     padding-top: 0;
     width: 100%;
   }
+  
   .Instructions p {
     padding: 0;
   }
@@ -399,6 +400,7 @@ button[disabled]:hover {
   p {
     font-size: 1rem;
   }
+
   form {
     flex-direction: column;
   }
