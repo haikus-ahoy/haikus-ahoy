@@ -5,7 +5,6 @@ import Haiku from './Component/Haiku.js';
 // import firebase from './firebase';
 import Swal from 'sweetalert2';
 import Instructions from './Instructions.js';
-import FinishedHaiku from './Component/FinishedHaiku';
 // import FinalPrint from './FInalPrint.js'
 import './App.css';
 import { tsImportEqualsDeclaration } from '@babel/types';
@@ -511,8 +510,11 @@ class App extends Component {
                   className="poem"
                   show={this.state.showPoem}
                   cancel={this.closePoem}
-                  refresh={this.refreshPage}>
+                  refresh={this.refreshPage}
+                  convertHaikuToString={this.convertHaikuToString}>
                       <p>{this.renderHaiku()}</p>
+
+
                   
                   {/* {this.countSyllables(this.state.wholeHaiku) >= 17 ? <div>{() => { this.setState({ showFinishedHaiku: true }) }}></div> : null} */}
 
@@ -537,7 +539,7 @@ class App extends Component {
             </ul>
             {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" className="removeLastItem" disabled={this.state.showFinishedHaiku} onClick={this.removeLastWord}>Remove last word</button> : null}
           </div>    
-            {this.state.showFinishedHaiku ? <FinishedHaiku renderedHaiku={this.renderHaiku()} convertHaikuToString={this.convertHaikuToString}/> : null}  
+            
         {/* WrapperBig */}
             </div>
       )}  
