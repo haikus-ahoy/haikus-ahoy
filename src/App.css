@@ -91,7 +91,7 @@ button{
   transition: color 0.3s, transform 0.3s;
 }
 
-.btnCanel>button:hover
+button:hover.btnCanel 
  {
   background: #8cffa5;
 }
@@ -316,14 +316,15 @@ button[disabled]{
     height: 100vh;
 
 }
-.btnCancel {
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+}
+button.btnCancel {
     background-color:  #4bff72;
     color: #004643;
     display: block;
     margin: 0 auto;
-    position: absolute;
-    bottom: 10%;
-    left: 45%;
 }
 
 .ContainerHaiku {
@@ -354,6 +355,12 @@ button[disabled]{
 }
 
 @media (max-width: 475px) {
+  .Instructions {
+    padding-top: 0;
+  }
+  .Instructions p {
+    padding: 0;
+  }
   p {
     font-size: 1rem;
   }
