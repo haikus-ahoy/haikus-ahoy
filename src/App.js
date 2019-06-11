@@ -179,7 +179,10 @@ class App extends Component {
     })
     //error checking 
     .catch(() => {
-      alert(`We're sorry, we're having some issues with our data manager. Please check back later!`)
+      Swal.fire({
+        type: 'error',
+        text: `We're sorry, we're having some issues with our data manager. Please check back later!`,
+      })
     })
   }
   //a third API call to get some words related to boats
