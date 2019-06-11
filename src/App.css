@@ -155,11 +155,18 @@ a {
 
 header {
   height: 90vh;
+  background-image: url("./assets/texture.svg");
   background-position: center;
   background-size: contain;
   position: relative;
   background-repeat: no-repeat;
   
+}
+
+.ship {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 form {
@@ -475,6 +482,10 @@ button[disabled]:hover {
 
   .Input {
     width: 60%;
+  }
+
+  .compass {
+
   }
 }
 

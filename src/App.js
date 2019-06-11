@@ -4,6 +4,8 @@ import Modal from './Component/Modal.js';
 import Haiku from './Component/Haiku.js';
 import Swal from 'sweetalert2';
 import Instructions from './Component/Instructions.js';
+import compass  from './assets/compass.svg';
+import ship from './assets/ship.svg'
 import './App.css';
 
 class App extends Component {
@@ -454,6 +456,7 @@ class App extends Component {
             </Modal>
           </div>
         <header>
+          <img src={compass} alt="a compass" className="compass"/>
           <div className="Form" id="formContainer">
           <form action="submit" onSubmit={this.handleSubmit}>
                 <label htmlFor="word" className="visuallyHidden">Input Starting Word Here</label>
@@ -462,6 +465,7 @@ class App extends Component {
                 </form>
           {/* form */}
           </div>
+          <img src={ship} alt="a ship" className="ship"/>
        </header>  
 
       <div className="ContainerHaiku" id="ContainerHaiku" ref={this.containerRef}>
