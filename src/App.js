@@ -456,6 +456,7 @@ class App extends Component {
             </Modal>
           </div>
         <header>
+          <h1>Haikus Ahoy!</h1>
           <img src={compass} alt="a compass" className="compass"/>
           <div className="Form" id="formContainer">
           <form action="submit" onSubmit={this.handleSubmit}>
