@@ -68,9 +68,9 @@ class App extends Component {
 
   // API call to Datamuse to get the syllable count for the user input, and to error handle potential spelling mistakes
   axios({
-    url: `http://api.datamuse.com/words?md=s&sp=${seedWord}`,
+    url: `https://api.datamuse.com/words?md=s&sp=${seedWord}`,
     method: 'GET',
-    dataResponse: 'json',
+    dataResponse: 'jsonp',
     })
     // a promise to return a successful or unsuccessful API call
     .then(response => {
@@ -132,9 +132,9 @@ class App extends Component {
     // const previousWord = this.state.seedWord;
     //call Axios
     axios({
-      url: `http://api.datamuse.com/words?lc=${previousWord}&md=s`,
+      url: `https://api.datamuse.com/words?lc=${previousWord}&md=s`,
       method: 'GET',
-      dataResponse: 'json',
+      dataResponse: 'jsonp',
     })
     // a promise to return a successful or unsuccessful API call
     .then((response) => {
@@ -172,9 +172,9 @@ class App extends Component {
   //a third API call to get some words related to boats
   getShipWords = () => {
     axios({
-      url: `http://api.datamuse.com/words?topics=boat&md=s&max=1000`,
+      url: `https://api.datamuse.com/words?topics=boat&md=s&max=1000`,
       method: 'GET',
-      dataResponse: 'json',
+      dataResponse: 'jsonp',
     // a promise to return a successful or unsuccessful API call
     }).then((responseTwo) => {
       //filtering the results based on the conditional filter of syllables below
