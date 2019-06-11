@@ -5,7 +5,6 @@ import Haiku from './Component/Haiku.js';
 // import firebase from './firebase';
 import Swal from 'sweetalert2';
 import Instructions from './Instructions.js';
-// import FinalPrint from './FInalPrint.js'
 import './App.css';
 import { tsImportEqualsDeclaration } from '@babel/types';
 
@@ -231,12 +230,14 @@ class App extends Component {
     // calls the getUserInput function, which calls the API
     this.getUserWord();
     //smooth scroll
-    const element = document.getElementById('ContainerHaiku');
-    element.scrollIntoView({
-      block: 'end',
-      behavior: 'smooth',
-    });
+    // const element = document.getElementById('ContainerHaiku');
+    // element.scrollIntoView({
+    //   block: 'end',
+    //   behavior: 'smooth',
+    // });
   }
+
+  
 
   // keeps track of the user's keystrokes in the input field
   handleChange = (event) => {

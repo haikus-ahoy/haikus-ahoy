@@ -283,6 +283,11 @@ button[disabled]{
   color: #666666;
 }
 
+button:disabled:hover,
+button[disabled]:hover {
+  background-color: #cccccc;
+}
+
 .Input {
   width: 50%;
   height: 40px;
