@@ -59,8 +59,8 @@ label {
   font-family: 'Kanit', sans-serif;
   font-weight: bold;
   text-align: center;
- 
 }
+
 h2, 
 h3, 
 label {
@@ -72,6 +72,7 @@ h1{
    color: #ffffb0;
    text-shadow: 2px 1px #4bff72;
 }
+
 h4{
  font-family: 'Kanit', sans-serif;
  font-size: 1.2rem;
@@ -160,7 +161,6 @@ a {
 
 header {
   height: 90vh;
-  /* background: url('./beach.jpg'); */
   background-position: center;
   background-size: contain;
   position: relative;
@@ -177,7 +177,6 @@ form {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  /* height: 100vh; */
 }
 
 form input {
@@ -201,16 +200,15 @@ form input:active {
   display: flex;
   flex-direction: column;
   justify-content: left;
-  
 }
+
 .Haiku {
   width: 80%;
   margin:0 auto;
   padding: 30px;
 }
 
-
-.haikuUl{
+.haikuUl {
   padding: 0;
   margin: 0;
   display: flex;
@@ -219,15 +217,13 @@ form input:active {
 }
 
 .suggestedWords{
-   padding: 0;
+  padding: 0;
   margin: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: center;
 }
-
- 
 
 .wordButton{
   padding: 5px 20px;
@@ -251,9 +247,11 @@ form input:active {
 .wordButton:focus {
   transform: scale(0.9);
 }
+
 .nextWordOption{
  position: relative;
 }
+
 .Boat {
   position: absolute;
   top: 30%;
@@ -284,6 +282,7 @@ button[disabled]{
   background-color: #cccccc;
   color: #666666;
 }
+
 .Input {
   width: 50%;
   height: 40px;
@@ -291,21 +290,24 @@ button[disabled]{
   border: 1px solid #4bff72;
   background: #ffffb0;
 }
-.Submit{
 
+.Submit{
   margin-left: 20px;
 }
+
 .Form {
   display: block;
   text-align: center;
   margin: 30px;
 }
+
 ::placeholder{
   text-align: center;
   color: #004643;
   font-size: 1rem;
   opacity: 1;
 }
+
 /* Modal */
 .Modal {
   position: absolute;
@@ -313,51 +315,57 @@ button[disabled]{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
- 
 }
 
 .modalWrapper {
-  /* background: url('./modal.svg'); */
-    width: 90vw;
-    height: 90vh;
-    margin: 0;
-    padding : 0;
-    background-position: center;
-    background-size:cover;
-  /* background-repeat: repeat; */
-  transition: all .8s;
-  
-   
+  width: 90vw;
+  height: 90vh;
+  margin: 0;
+  padding : 0;
+  background-position: center;
+  background-size:cover;
+  transition: all .8s; 
 }
+
 .instructionWrapper{
   background: url('./modal.svg');
   background-position: center;
-    background-size:cover;
-    height: 100vh;
+  background-size:cover;
+  height: 100vh;
 
 }
 .buttonContainer {
   display: flex;
   justify-content: center;
 }
-button.btnCancel {
-    background-color:  #4bff72;
-    color: #004643;
-    display: block;
-    margin: 20px auto 0;
+.btnCancel {
+  background-color:  #4bff72;
+  color: #004643;
+  display: block;
+  margin: 20px auto 0;
 }
-
 .ContainerHaiku {
-  /* height: 100vh; */
   position: relative;
 }
 
+/* SWAL styling */
+.swal2-popup {
+  background: #ffffb0;
+}
+
+.swal2-content {
+  color: #004643;
+}
+
+.swal2-confirm.swal2-styled {
+  background: #4bff72;
+  color: #004643;
+}
 
 @media (max-width: 1000px) {
   p {
     font-size: 1.2rem;
   }
-
 }
 
 @media (max-width: 680px) {
