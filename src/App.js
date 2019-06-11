@@ -456,7 +456,7 @@ class App extends Component {
             
                   <form  action="submit">
                     <label htmlFor="word" className="visuallyHidden">Input Starting Word Here</label>
-                    <input className="Input" onChange={this.handleChange} placeholder="Enter your Starting Word" value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/> 
+                    <input className="Input" onChange={this.handleChange} placeholder="Enter Your Starting Word" value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/> 
                     <button disabled={this.state.wholeHaiku.length > 0 ? true : false } onKeyDown={this.handleKeyDown} onClick={this.handleClick} className="Submit"><a href="#ContainerHaiku">Submit</a></button>
                   </form>
             {/* form */}
