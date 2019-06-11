@@ -45,11 +45,6 @@ li {
   margin: 5px;
 }
 
-
-button:focus {
-  outline: 0;
-}
-
 a {
   text-decoration: none;
   color: inherit;
@@ -92,6 +87,25 @@ button{
   border-radius: 15px;
   padding: 5px 20px;
   font-size: 1.4rem;
+  border: none;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.btnCanel>button:hover
+ {
+  background: #8cffa5;
+}
+
+.btnCanel.button:active {
+  transform: scale(0.9);
+}
+
+button:focus {
+  outline: 0;
+}
+
+.btnCanel.button:focus {
+  transform: scale(1.2);
 }
 
 p {
@@ -158,6 +172,16 @@ form {
 
 form input {
  width: 100%;
+ transition: border 0.3s, background 0.3s, transform 0.3s;
+}
+
+form input:focus {
+  border: 5px solid #8cffa5;
+  transform: scale(1.05);
+}
+
+form input:active {
+  background: #8cffa5;
 }
 
 /* Haiku Styles */
