@@ -4,24 +4,24 @@ import './Haiku.css';
 
 const Haiku = (props) => {
     return (
-        <div>
-            <div className="modal-wrapper"
+        <div className="haikuModal">
+            <div className="haikuBody"
                 style={{
                     transform: props.show ? 'translateY(0vh)' : 'translateY(-100vh)',
-                    opacity: props.show ? '1' : '0'
+                    display: props.show ? 'block' : 'none'
                 }}>
-                <div className="modal-header">
-                    <h3>Modal Header</h3>
-                    <span className="close-modal-btn" onClick={props.close}>×</span>
+                <div className="haikuHeader">
+                    <h3>Haiku</h3>
+                    <span className="closeHaikuBtn" onClick={props.cancel}>×</span>
                 </div>
-                <div className="modal-body">
-                    <p>
+                <div className="haikuContent">
+                    <div>
                         {props.children}
-                    </p>
+                    </div>
                 </div>
-                <div className="modal-footer">
-                    <button className="btn-cancel" onClick={props.close}>CLOSE</button>
-                    <button className="btn-continue">CONTINUE</button>
+                <div className="haikuFooter">
+                    
+                    <button className="btnContinue" onClick={props.refresh}>Start Over</button>
                 </div>
             </div>
         </div>

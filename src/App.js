@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Modal from './Modal.js';
+import Haiku from './Component/Haiku.js'
 // import firebase from './firebase';
 import Swal from 'sweetalert2';
 import Instructions from './Instructions.js';
@@ -28,6 +29,7 @@ class App extends Component {
       syllableFilter: 4,
       isShowing: false,
       showFinishedHaiku: false,
+      showPoem: false,
     }
     
   }
@@ -43,6 +45,19 @@ class App extends Component {
       isShowing: false
     });
   }
+
+  openPoem = () =>{
+    this.setState({
+      showPoem:true,
+    })
+  }
+  closePoem = () =>{
+    this.setState({
+      showPoem: false,
+    })
+  }
+   
+
   // function to get the user input, which makes the API call to the Datamuse API
   getUserWord = () => {
     const seedWord = this.state.seedWord.toLowerCase();
@@ -412,8 +427,8 @@ class App extends Component {
     return (
 
 
-        <div className="Wrapper">
-         <header>
+     <div className="Wrapper">
+       <header>
 
           <div className="Modal">
             <Modal
@@ -424,24 +439,23 @@ class App extends Component {
             </Modal>
           </div>
          
-            <div className="Form" id="formContainer">
-            
-                  <form  action="submit">
-                    <label htmlFor="word" className="visuallyHidden">Input Starting Word Here</label>
-                    <input className="Input" onChange={this.handleChange} placeholder="Enter your Starting Word" value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/>
-                    <button disabled={this.state.wholeHaiku.length > 0 ? true : false } onClick={this.handleClick} className="Submit">Submit</button>
-                  </form>
-
-              {/* form */}
-              
-            </div>
-          </header>  
+          <div className="Form" id="formContainer">
+      
+            <form  action="submit">
+              <label htmlFor="word" className="visuallyHidden">Input Starting Word Here</label>
+              <input className="Input" onChange={this.handleChange} placeholder="Enter your Starting Word" value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/>
+              <button disabled={this.state.wholeHaiku.length > 0 ? true : false } onClick={this.handleClick} className="Submit">Submit</button>
+            </form>
+      
+            {/* form */}
+          </div>
+       </header>  
         
-          <div className="ContainerHaiku" id="ContainerHaiku">
+      <div className="ContainerHaiku" id="ContainerHaiku">
           <div className="Haiku" id="dynamicHaiku">
             
             {this.state.wholeHaiku.length > 0 ? <h2 onClick={this.removeLastWord}>Haiku</h2> : null}
-                  <div className="flexParent">
+            <div className="flexParent">
                 
                     <div className="lines">
                       
@@ -455,9 +469,9 @@ class App extends Component {
                       }
                       {/* lines */}
                     </div>
-                    <div className="lines">
+                   <div className="lines">
                       
-                  <ul className="haikuUl">
+                       <ul className="haikuUl">
                         {this.state.lineTwo.map((result, i) => {
                           return (<li key={i}><h4>{result.word}</h4></li>)
                         }
@@ -467,25 +481,35 @@ class App extends Component {
                         this.syllableDisplay(this.state.lineTwo)
                       }
 
-                    </div>
-                    <div className="lines">
+                   </div>
+                   <div className="lines">
                       
-                  <ul className="haikuUl">
+                      <ul className="haikuUl">
                         {this.state.lineThree.map((result, i) => {
                           return (<li key={i}><h4>{result.word}</h4></li>)
                         }
                         )}
-                     
-                    </ul>
-                    {
-                      this.syllableDisplay(this.state.lineThree)
-                    }
+                        
+                      </ul>
+                        {
+                          this.syllableDisplay(this.state.lineThree)
+                        }
                   </div>
                   
-                  <div>
-                    {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button onClick={() => {this.setState({showFinishedHaiku: true})}}>Click to see whole poem</button> : null}
-                  </div>
-                </div>
+              <div>
+                {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button onClick={this.openPoem}>Click to see whole poem</button> : null}
+                {/* {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button onClick={() => { this.setState({ showFinishedHaiku: true }) }}>Click to see whole poem</button> : null} */}
+                <Haiku
+                  className="poem"
+                  show={this.state.showPoem}
+                  cancel={this.closePoem}>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A ad cupiditate, laudantium dolores labore consectetur consequuntur exercitationem sequi quod iusto voluptatem consequatur reiciendis incidunt dolorum quaerat! Sunt dolore quas sequi!</p>
+                  
+                  {/* {this.countSyllables(this.state.wholeHaiku) >= 17 ? <div>{() => { this.setState({ showFinishedHaiku: true }) }}></div> : null} */}
+
+                </Haiku>
+               </div>
+            </div>
               
             {/* haiku */}
             </div>   
@@ -506,8 +530,8 @@ class App extends Component {
           </div>    
             {this.state.showFinishedHaiku ? <FinishedHaiku renderedHaiku={this.renderHaiku()} convertHaikuToString={this.convertHaikuToString}/> : null}  
         {/* WrapperBig */}
-        </div>
       </div>
+    </div>
  
     );
   }

@@ -1,39 +1,51 @@
-.modal-wrapper {
-    background: white;
+.haikuModal{
+    position: absolute;
+    z-index: 30;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width:100%;
+    
+}
+
+
+.haikuBody {
+    background:url('../modal.svg');
+    background-size: contain; 
     border: 1px solid #d0cccc;
     box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
     margin: 100px auto 0;
     transition: all .8s;
-    width: 60%;
+    height: 70vh;
 }
 
-.modal-header {
+.haikuHeader {
     background: #263238;
     height: 40px;
     line-height: 40px;
     padding: 5px 20px;
-    text-align: right;
+    text-align: center;
 }
 
-.modal-header h3 {
+.haikuHeader h3 {
     color: white;
-    float: left;
+     font-family: 'Kanit', sans-serif;
     margin: 0;
     padding: 0;
 }
 
-.modal-body {
+.haikuContent {
     padding: 10px 15px;
     text-align: center;
 }
 
-.modal-footer {
-    background: #263238;
+.haikuFooter {
+   color:#004643;
     height: 35px;
     padding: 15px;
 }
 
-.close-modal-btn {
+.closeHaikuBtn{
     color: white;
     cursor: pointer;
     float: right;
@@ -45,33 +57,27 @@
     color: black;
 }
 
-.btn-cancel, .btn-continue {
-    background: coral;
-    border: none;
-    color: white;
+
+
+
+.btnContinue {
+    background-color: #ffffb0;;
+    display: block;
+    margin: 0 auto;
+     border: none;
     cursor: pointer;
     font-weight: bold;
     outline: none;
     padding: 10px;
 }
 
-.btn-cancel {
-    background-color: #b71c1c;
-    float: left;
-}
-
-.btn-continue {
-    background-color: #1b5e20;
-    float: right;
-}
-
-.back-drop {
+/* .back-drop {
     background-color: rgba(48, 49, 48, 0.42);
     height: 100%;
     position: fixed;
     transition: all 1.3s;
     width: 100%;
-}
+} */
 
 .open-modal-btn {
     margin: 15px;
