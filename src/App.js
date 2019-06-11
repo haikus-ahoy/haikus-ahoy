@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Modal from './Modal.js';
 import Haiku from './Component/Haiku.js';
-// import firebase from './firebase';
 import Swal from 'sweetalert2';
 import Instructions from './Instructions.js';
 import './App.css';
-import { tsImportEqualsDeclaration } from '@babel/types';
 
 class App extends Component {
   constructor() {  
@@ -34,7 +32,6 @@ class App extends Component {
     //create ref object 
     this.containerRef = React.createRef();
   }
-
 
   //calling the function of the axios call for all the ship words that we pull three at a time from 
   componentDidMount(){
@@ -271,7 +268,6 @@ class App extends Component {
   buttonWordChoice = (event, index) => {
     //event prevent default
     event.preventDefault();
-    console.log(this.myRef())
     //saving line one in a copy
     const wholeHaiku = [...this.state.wholeHaiku]
     //creating a variable for the new word
