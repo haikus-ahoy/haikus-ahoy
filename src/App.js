@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Modal from './Modal.js';
 import Haiku from './Component/Haiku.js';
-// import firebase from './firebase';
 import Swal from 'sweetalert2';
 import Instructions from './Instructions.js';
-// import FinalPrint from './FInalPrint.js'
 import './App.css';
-import { tsImportEqualsDeclaration } from '@babel/types';
 
 class App extends Component {
   constructor() {  
