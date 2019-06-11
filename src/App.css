@@ -154,7 +154,7 @@ a {
 
 header {
   height: 90vh;
-  background: url('./texture.svg');
+  background: url('./assets/texture.svg');
   background-position: center;
   background-size: cover;
   position: relative;

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Modal from './Modal.js';
 import Haiku from './Component/Haiku.js';
+import compass from './assets/compass.svg';
 // import firebase from './firebase';
 import Swal from 'sweetalert2';
 import Instructions from './Instructions.js';
@@ -428,7 +429,7 @@ class App extends Component {
   render() {
     return (
 
-
+      
      <div className="Wrapper">
        
 
@@ -441,6 +442,7 @@ class App extends Component {
             </Modal>
           </div>
         <header>
+          <img src={compass} className="Compass" alt="Compass" />
             <div className="Form" id="formContainer">
             
                   <form  action="submit">
@@ -451,7 +453,7 @@ class App extends Component {
             {/* form */}
             
           </div>
-          
+         
        </header>  
 
       <div className="ContainerHaiku" id="ContainerHaiku">
