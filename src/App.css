@@ -75,7 +75,7 @@ label {
 h1{
   font-size: 3rem;
    color: #ffffb0;
-   text-shadow: 2px 1px #4bff72
+   text-shadow: 2px 1px #4bff72;
 }
 h4{
  font-family: 'Kanit', sans-serif;
@@ -116,6 +116,7 @@ a {
   width: 70%;
   margin: 0 auto;
   padding-top: 50px;
+  position: relative;
 }
 
 .Instructions p{
@@ -126,31 +127,37 @@ a {
   text-align: center;
 }
 
-.buttonContainer {
-  display: block;
-  text-align: center;
-  margin: 30px;
-}
-.buttonContainer button{
-  margin-bottom: 20px;
-}
+
 .nextWordOption{
   margin: 0 auto;
 }
 
 /* Header styles */
 
+header {
+  height: 90vh;
+  /* background: url('./beach.jpg'); */
+  background-position: center;
+  background-size: contain;
+  position: relative;
+  background-repeat: no-repeat;
+  
+}
 
 form {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* height: 100vh; */
 }
 
 form input {
-  margin: 100px;
+ width: 100%;
 }
 
 /* Haiku Styles */
@@ -165,7 +172,9 @@ form input {
 .Haiku {
   width: 80%;
   margin:0 auto;
+  padding: 30px;
 }
+
 
 .haikuUl{
   padding: 0;
@@ -173,28 +182,30 @@ form input {
   display: flex;
   flex-wrap: wrap;
   background-color: #ffffb0;
- 
-  
 }
+
 .suggestedWords{
    padding: 0;
   margin: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  align-content: center
+  align-content: center;
 }
+
+ 
+
 .wordButton{
   padding: 5px 20px;
   background: #004643;
   border: 1px solid #4bff72;
-  color:#4bff72;
+  color:#ffffb0;
   border-radius: 10px;
   text-align: center;
 
 }
 .wordButton:hover{
-  transform: scale(1.4);
+  font-weight: bold;
 }
 .nextWordOption{
  position: relative;
@@ -206,13 +217,19 @@ form input {
 }
 .removeLastItem{
  margin: 20px 0;
- display: flex;
- justify-content: center;
+ display: block;
+ margin: 30px auto;
+
 }
 .removeLastItem button {
   width: 30%;
   background: #4bff72;
+}
 
+.seePoem {
+  display: block;
+  margin: 30px auto;
+  
 }
 
 /* form */
@@ -248,25 +265,31 @@ button[disabled]{
 /* Modal */
 .Modal {
   position: absolute;
-  
   z-index: 10;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
  
 }
+
 .modalWrapper {
-  background: url('./modal.svg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  /* background: url('./modal.svg'); */
+    width: 90vw;
+    height: 90vh;
+    margin: 0;
+    padding : 0;
+    background-position: center;
+    background-size:cover;
+  /* background-repeat: repeat; */
   transition: all .8s;
-  height: 100vh;
-  width: 100vw;
+  
    
 }
 .instructionWrapper{
-  background: #004643;
+  background: url('./modal.svg');
+  background-position: center;
+    background-size:cover;
+    height: 100vh;
 
 }
 .btnCancel {
@@ -274,11 +297,14 @@ button[disabled]{
     color: #004643;
     display: block;
     margin: 0 auto;
-    margin-bottom: 20px;
+    position: absolute;
+    bottom: 10%;
+    left: 45%;
 }
 
 .ContainerHaiku {
-  height: 100vh;
+  /* height: 100vh; */
+  position: relative;
 }
 
 

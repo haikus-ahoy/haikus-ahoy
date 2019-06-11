@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Modal from './Modal.js';
+import Haiku from './Component/Haiku.js';
 // import firebase from './firebase';
 import Swal from 'sweetalert2';
 import Instructions from './Instructions.js';
@@ -28,6 +29,7 @@ class App extends Component {
       syllableFilter: 4,
       isShowing: false,
       showFinishedHaiku: false,
+      showPoem: false,
     }
     
   }
@@ -43,6 +45,22 @@ class App extends Component {
       isShowing: false
     });
   }
+
+  openPoem = () =>{
+    this.setState({
+      showPoem:true,
+    })
+  }
+  closePoem = () =>{
+    this.setState({
+      showPoem: false,
+    })
+  }
+   refreshPage = () => {
+     window.location.reload(); 
+   }
+
+
   // function to get the user input, which makes the API call to the Datamuse API
   getUserWord = () => {
     const seedWord = this.state.seedWord.toLowerCase();
@@ -412,8 +430,8 @@ class App extends Component {
     return (
 
 
-        <div className="Wrapper">
-         <header>
+     <div className="Wrapper">
+       
 
           <div className="Modal">
             <Modal
@@ -423,7 +441,7 @@ class App extends Component {
               <Instructions />
             </Modal>
           </div>
-         
+        <header>
             <div className="Form" id="formContainer">
             
                   <form  action="submit">
@@ -432,16 +450,18 @@ class App extends Component {
                     <button disabled={this.state.wholeHaiku.length > 0 ? true : false } onClick={this.handleClick} className="Submit"><a href="#ContainerHaiku">Submit</a></button>
                   </form>
 
-              {/* form */}
-              
-            </div>
-          </header>  
+      
+            {/* form */}
+            
+          </div>
+          
+       </header>  
         
-          <div className="ContainerHaiku" id="ContainerHaiku">
+      <div className="ContainerHaiku" id="ContainerHaiku">
           <div className="Haiku" id="dynamicHaiku">
             
             {this.state.wholeHaiku.length > 0 ? <h2 onClick={this.removeLastWord}>Haiku</h2> : null}
-                  <div className="flexParent">
+            <div className="flexParent">
                 
                     <div className="lines">
                       
@@ -455,9 +475,9 @@ class App extends Component {
                       }
                       {/* lines */}
                     </div>
-                    <div className="lines">
+                   <div className="lines">
                       
-                  <ul className="haikuUl">
+                       <ul className="haikuUl">
                         {this.state.lineTwo.map((result, i) => {
                           return (<li key={i}><h4>{result.word}</h4></li>)
                         }
@@ -467,25 +487,36 @@ class App extends Component {
                         this.syllableDisplay(this.state.lineTwo)
                       }
 
-                    </div>
-                    <div className="lines">
+                   </div>
+                   <div className="lines">
                       
-                  <ul className="haikuUl">
+                      <ul className="haikuUl">
                         {this.state.lineThree.map((result, i) => {
                           return (<li key={i}><h4>{result.word}</h4></li>)
                         }
                         )}
-                     
-                    </ul>
-                    {
-                      this.syllableDisplay(this.state.lineThree)
-                    }
+                        
+                      </ul>
+                        {
+                          this.syllableDisplay(this.state.lineThree)
+                        }
                   </div>
                   
-                  <div>
-                    {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button onClick={() => {this.setState({showFinishedHaiku: true})}}>Click to see whole poem</button> : null}
-                  </div>
-                </div>
+              <div>
+                {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button className="seePoem" onClick={this.openPoem}>Click to see whole poem</button> : null}
+                {/* {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button onClick={() => { this.setState({ showFinishedHaiku: true }) }}>Click to see whole poem</button> : null} */}
+                <Haiku
+                  className="poem"
+                  show={this.state.showPoem}
+                  cancel={this.closePoem}
+                  refresh={this.refreshPage}>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A ad cupiditate, laudantium dolores labore consectetur consequuntur exercitationem sequi quod iusto voluptatem consequatur reiciendis incidunt dolorum quaerat! Sunt dolore quas sequi!</p>
+                  
+                  {/* {this.countSyllables(this.state.wholeHaiku) >= 17 ? <div>{() => { this.setState({ showFinishedHaiku: true }) }}></div> : null} */}
+
+                </Haiku>
+               </div>
+            </div>
               
             {/* haiku */}
             </div>   
@@ -502,12 +533,12 @@ class App extends Component {
                 )
               })}
             </ul>
-            {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" disabled={this.state.showFinishedHaiku} onClick={this.removeLastWord}>Remove last word</button> : null}
+            {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" className="removeLastItem" disabled={this.state.showFinishedHaiku} onClick={this.removeLastWord}>Remove last word</button> : null}
           </div>    
             {this.state.showFinishedHaiku ? <FinishedHaiku renderedHaiku={this.renderHaiku()} convertHaikuToString={this.convertHaikuToString}/> : null}  
         {/* WrapperBig */}
-        </div>
       </div>
+    </div>
  
     );
   }
