@@ -32,7 +32,7 @@ class App extends Component {
     }
     
     //create ref object 
-    this.containerElement = null;
+    this.containerRef = React.createRef();
   }
 
 
@@ -43,18 +43,11 @@ class App extends Component {
       isShowing:true,
     })
   }
-  //create
-  setContainerRef = (element) => {
-  this.containerElement = element;
-}
-//make a scroll function
-  scrollToMyRef = () => {
-    console.log(this.containerElement, "container element")
-  // if (this.containerElement) {
-  //   // console.log('scrollToMyRef', this.myRef.current.scrollTop, this.containerElement.current.scrollHeight)
-  //   window.scrollTo(0, this.containerElement.current.offsetTop)
-  // }
-};
+
+  //smooth scroll
+  scrollToElement = () => {
+    window.scrollTo(0, this.containerRef.current.offsetTop);
+  }
 
 
   closeModalHandler = () => {
@@ -247,8 +240,12 @@ class App extends Component {
     e.preventDefault();
     // calls the getUserInput function, which calls the API
     this.getUserWord();
-    // run this method to execute scrolling.
-    this.scrollToMyRef();
+    
+    setTimeout(()=>{
+      // run this method to execute scrolling.
+      this.scrollToElement();
+
+    }, 100)
   }
 
   handleKeyDown = (e) => {
@@ -374,7 +371,7 @@ class App extends Component {
   }  
 
   //creating a function to display the syllable count 
-  syllableDisplay (currentLine) {
+  syllableDisplay = (currentLine) => {
     //creating a boolean for when each line is full 
     const lineOneEmpty = this.countSyllables(this.state.lineOne) === 0;
     const lineOneFull = this.countSyllables(this.state.lineOne) === 5;
@@ -479,7 +476,7 @@ class App extends Component {
           </div>
        </header>  
 
-      <div className="ContainerHaiku" id="ContainerHaiku" ref={this.setContainerRef}>
+      <div className="ContainerHaiku" id="ContainerHaiku" ref={this.containerRef}>
       {this.state.wholeHaiku.length > 0 && (
         <div>
 
