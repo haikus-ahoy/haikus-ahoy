@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/haikus-ahoy/static/css/main.eccfd84b.chunk.css",
+    "main.js": "/haikus-ahoy/static/js/main.32481bf0.chunk.js",
+    "main.js.map": "/haikus-ahoy/static/js/main.32481bf0.chunk.js.map",
+    "runtime~main.js": "/haikus-ahoy/static/js/runtime~main.af42578f.js",
+    "runtime~main.js.map": "/haikus-ahoy/static/js/runtime~main.af42578f.js.map",
+    "static/js/2.df9fc6cf.chunk.js": "/haikus-ahoy/static/js/2.df9fc6cf.chunk.js",
+    "static/js/2.df9fc6cf.chunk.js.map": "/haikus-ahoy/static/js/2.df9fc6cf.chunk.js.map",
+    "index.html": "/haikus-ahoy/index.html",
+    "precache-manifest.122a316e1ca66cb4434696597a349381.js": "/haikus-ahoy/precache-manifest.122a316e1ca66cb4434696597a349381.js",
+    "service-worker.js": "/haikus-ahoy/service-worker.js",
+    "static/css/main.eccfd84b.chunk.css.map": "/haikus-ahoy/static/css/main.eccfd84b.chunk.css.map",
+    "static/media/App.css": "/haikus-ahoy/static/media/modal.177550ee.svg"
+  }
+}
