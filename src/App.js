@@ -534,9 +534,7 @@ class App extends Component {
           </ul>
           {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" className="removeLastItem" disabled={this.state.showFinishedHaiku} onClick={this.removeLastWord}>Remove last word</button> : null}
         </div>    
-          
-        {/* WrapperBig */}
-        </div>
+      </div>
       )}  
       </div>
     </div>
