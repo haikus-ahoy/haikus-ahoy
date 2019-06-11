@@ -5,7 +5,6 @@ import Haiku from './Component/Haiku.js';
 // import firebase from './firebase';
 import Swal from 'sweetalert2';
 import Instructions from './Instructions.js';
-// import FinalPrint from './FInalPrint.js'
 import './App.css';
 import { tsImportEqualsDeclaration } from '@babel/types';
 
@@ -32,7 +31,11 @@ class App extends Component {
       showPoem: false,
     }
     
+    //create ref object 
+    this.containerRef = React.createRef();
   }
+
+
   //calling the function of the axios call for all the ship words that we pull three at a time from 
   componentDidMount(){
     this.getShipWords();
@@ -40,6 +43,13 @@ class App extends Component {
       isShowing:true,
     })
   }
+
+  //smooth scroll
+  scrollToElement = () => {
+    window.scrollTo(0, this.containerRef.current.offsetTop);
+  }
+
+
   closeModalHandler = () => {
     this.setState({
       isShowing: false
@@ -225,17 +235,17 @@ class App extends Component {
   }
 
   // click event for our button
-  handleClick = (e) => {
+  handleSubmit = (e) => {
     // prevents default action
     e.preventDefault();
     // calls the getUserInput function, which calls the API
     this.getUserWord();
-    //smooth scroll
-    const element = document.getElementById('ContainerHaiku');
-    element.scrollIntoView({
-      block: 'end',
-      behavior: 'smooth',
-    });
+    
+    setTimeout(()=>{
+      // run this method to execute scrolling.
+      this.scrollToElement();
+
+    }, 100)
   }
 
   handleKeyDown = (e) => {
@@ -261,6 +271,7 @@ class App extends Component {
   buttonWordChoice = (event, index) => {
     //event prevent default
     event.preventDefault();
+    console.log(this.myRef())
     //saving line one in a copy
     const wholeHaiku = [...this.state.wholeHaiku]
     //creating a variable for the new word
@@ -360,7 +371,7 @@ class App extends Component {
   }  
 
   //creating a function to display the syllable count 
-  syllableDisplay (currentLine) {
+  syllableDisplay = (currentLine) => {
     //creating a boolean for when each line is full 
     const lineOneEmpty = this.countSyllables(this.state.lineOne) === 0;
     const lineOneFull = this.countSyllables(this.state.lineOne) === 5;
@@ -436,6 +447,8 @@ class App extends Component {
     
   }
 
+   
+
   render() {
     return (
 
@@ -454,25 +467,23 @@ class App extends Component {
         <header>
             <div className="Form" id="formContainer">
             
-                  <form  action="submit">
-                    <label htmlFor="word" className="visuallyHidden">Input Starting Word Here</label>
-                    <input className="Input" onChange={this.handleChange} placeholder="Enter Your Starting Word" value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/> 
-                    <button disabled={this.state.wholeHaiku.length > 0 ? true : false } onKeyDown={this.handleKeyDown} onClick={this.handleClick} className="Submit"><a href="#ContainerHaiku">Submit</a></button>
+            <form action="submit" onSubmit={this.handleSubmit}>
+                  <label htmlFor="word" className="visuallyHidden">Input Starting Word Here</label>
+                  <input className="Input" onChange={this.handleChange} placeholder="Enter Your Starting Word" value={this.state.seedWord} id="word" name="word" type="text" disabled={this.state.wholeHaiku.length > 0 ? true : false}/> 
+                  <button disabled={this.state.wholeHaiku.length > 0 ? true : false} className="Submit">Submit</button>
                   </form>
             {/* form */}
-            
           </div>
-          
        </header>  
 
-      <div className="ContainerHaiku" id="ContainerHaiku">
+      <div className="ContainerHaiku" id="ContainerHaiku" ref={this.containerRef}>
       {this.state.wholeHaiku.length > 0 && (
         <div>
 
        
           <div className="Haiku" id="dynamicHaiku">
             
-            {this.state.wholeHaiku.length > 0 ? <h2 onClick={this.removeLastWord}>Haiku</h2> : null}
+            {this.state.wholeHaiku.length > 0 ? <h2 onSubmit={this.removeLastWord}>Haiku</h2> : null}
             <div className="flexParent">
                 
                     <div className="lines">
@@ -551,8 +562,8 @@ class App extends Component {
             {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" className="removeLastItem" disabled={this.state.showFinishedHaiku} onClick={this.removeLastWord}>Remove last word</button> : null}
           </div>    
             
-        {/* WrapperBig */}
-            </div>
+          {/* WrapperBig */}
+        </div>
       )}  
       </div>
     </div>
