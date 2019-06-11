@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/haikus-ahoy/precache-manifest.97225b64844758237b2acbbaaf65c613.js"
+  "/haikus-ahoy/precache-manifest.b0cae76620ee272eea658bcb04bbe010.js"
 );
 
 self.addEventListener('message', (event) => {
