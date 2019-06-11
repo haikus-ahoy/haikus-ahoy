@@ -387,6 +387,7 @@ button[disabled]{
     padding-top: 0;
     width: 100%;
   }
+  
   .Instructions p {
     padding: 0;
   }
@@ -394,6 +395,7 @@ button[disabled]{
   p {
     font-size: 1rem;
   }
+
   form {
     flex-direction: column;
   }
