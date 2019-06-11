@@ -17,6 +17,7 @@
     margin: 100px auto 0;
     transition: all .8s;
     height: 70vh;
+    position: relative;
 }
 
 .haikuHeader {
@@ -37,6 +38,10 @@
 .haikuContent {
     padding: 10px 15px;
     text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .haikuFooter {
@@ -58,8 +63,6 @@
 }
 
 
-
-
 .btnContinue {
     background-color: #ffffb0;;
     display: block;
@@ -71,13 +74,7 @@
     padding: 10px;
 }
 
-/* .back-drop {
-    background-color: rgba(48, 49, 48, 0.42);
-    height: 100%;
-    position: fixed;
-    transition: all 1.3s;
-    width: 100%;
-} */
+
 
 .open-modal-btn {
     margin: 15px;

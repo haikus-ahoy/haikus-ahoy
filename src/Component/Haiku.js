@@ -18,10 +18,9 @@ const Haiku = (props) => {
                     <div>
                         {props.children}
                     </div>
-                </div>
-                <div className="haikuFooter">
-                    
-                    <button className="btnContinue" onClick={props.refresh}>Start Over</button>
+                    <div className="haikuFooter">
+                        <button className="btnContinue" onClick={props.refresh}>Start Over</button>
+                    </div>
                 </div>
             </div>
         </div>

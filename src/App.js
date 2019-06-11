@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Modal from './Modal.js';
-import Haiku from './Component/Haiku.js'
+import Haiku from './Component/Haiku.js';
 // import firebase from './firebase';
 import Swal from 'sweetalert2';
 import Instructions from './Instructions.js';
@@ -56,7 +56,10 @@ class App extends Component {
       showPoem: false,
     })
   }
-   
+   refreshPage = () => {
+     window.location.reload(); 
+   }
+
 
   // function to get the user input, which makes the API call to the Datamuse API
   getUserWord = () => {
@@ -428,7 +431,7 @@ class App extends Component {
 
 
      <div className="Wrapper">
-       <header>
+       
 
           <div className="Modal">
             <Modal
@@ -438,7 +441,8 @@ class App extends Component {
               <Instructions />
             </Modal>
           </div>
-         
+
+        <header>
           <div className="Form" id="formContainer">
       
             <form  action="submit">
@@ -448,7 +452,9 @@ class App extends Component {
             </form>
       
             {/* form */}
+            
           </div>
+          
        </header>  
         
       <div className="ContainerHaiku" id="ContainerHaiku">
@@ -497,12 +503,13 @@ class App extends Component {
                   </div>
                   
               <div>
-                {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button onClick={this.openPoem}>Click to see whole poem</button> : null}
+                {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button className="seePoem" onClick={this.openPoem}>Click to see whole poem</button> : null}
                 {/* {this.countSyllables(this.state.wholeHaiku) >= 17 ? <button onClick={() => { this.setState({ showFinishedHaiku: true }) }}>Click to see whole poem</button> : null} */}
                 <Haiku
                   className="poem"
                   show={this.state.showPoem}
-                  cancel={this.closePoem}>
+                  cancel={this.closePoem}
+                  refresh={this.refreshPage}>
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A ad cupiditate, laudantium dolores labore consectetur consequuntur exercitationem sequi quod iusto voluptatem consequatur reiciendis incidunt dolorum quaerat! Sunt dolore quas sequi!</p>
                   
                   {/* {this.countSyllables(this.state.wholeHaiku) >= 17 ? <div>{() => { this.setState({ showFinishedHaiku: true }) }}></div> : null} */}
@@ -526,7 +533,7 @@ class App extends Component {
                 )
               })}
             </ul>
-            {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" disabled={this.state.showFinishedHaiku} onClick={this.removeLastWord}>Remove last word</button> : null}
+            {this.state.wholeHaiku.length > 0 ? <button id="removeLastItem" className="removeLastItem" disabled={this.state.showFinishedHaiku} onClick={this.removeLastWord}>Remove last word</button> : null}
           </div>    
             {this.state.showFinishedHaiku ? <FinishedHaiku renderedHaiku={this.renderHaiku()} convertHaikuToString={this.convertHaikuToString}/> : null}  
         {/* WrapperBig */}
